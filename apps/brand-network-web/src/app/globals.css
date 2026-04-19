@@ -377,7 +377,7 @@ input, textarea, select {
 
 .heading-display {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 300;
   line-height: 1.1;
   letter-spacing: -0.025em;
   color: var(--color-text);
@@ -385,7 +385,7 @@ input, textarea, select {
 
 .heading-section {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.2;
   letter-spacing: -0.02em;
   color: var(--color-text);
