@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
     root: path.resolve(__dirname, '../..'),
   },
 
+  // ── Transpile workspace packages (TypeScript source) ────────────────────
+  transpilePackages: ['@toptenprom/database'],
+
   // ── Image Configuration ─────────────────────────────────────────────────
   images: {
     remotePatterns: [
