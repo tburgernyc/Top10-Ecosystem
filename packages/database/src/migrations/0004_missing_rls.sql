@@ -5,32 +5,32 @@
 --   3. Mutable search_path on public functions (security warning)
 
 -- ─── 1. FIX MUTABLE SEARCH_PATH ON ALL PUBLIC FUNCTIONS ─────────────────────
--- These were defined in 0001 without SET search_path, making them mutable.
-ALTER FUNCTION public.current_tenant_id() SET search_path = pg_catalog, public;
-ALTER FUNCTION public.current_user_id()   SET search_path = pg_catalog, public;
-ALTER FUNCTION public.current_user_role() SET search_path = pg_catalog, public;
-
--- Supabase-native trigger functions (created outside migrations).
--- ALTER FUNCTION does not support IF EXISTS, so use a DO block to guard.
+-- ALTER FUNCTION fails if the function doesn't exist yet, so guard all five
+-- with a single DO block that checks pg_proc before executing each one.
 DO $$
+DECLARE
+  func_names text[] := ARRAY[
+    'current_tenant_id',
+    'current_user_id',
+    'current_user_role',
+    'handle_new_user',
+    'update_updated_at'
+  ];
+  fname text;
 BEGIN
-  IF EXISTS (
-    SELECT 1 FROM pg_proc p
-    JOIN pg_namespace n ON n.oid = p.pronamespace
-    WHERE n.nspname = 'public' AND p.proname = 'handle_new_user'
-      AND pg_get_function_identity_arguments(p.oid) = ''
-  ) THEN
-    EXECUTE 'ALTER FUNCTION public.handle_new_user() SET search_path = pg_catalog, public';
-  END IF;
-
-  IF EXISTS (
-    SELECT 1 FROM pg_proc p
-    JOIN pg_namespace n ON n.oid = p.pronamespace
-    WHERE n.nspname = 'public' AND p.proname = 'update_updated_at'
-      AND pg_get_function_identity_arguments(p.oid) = ''
-  ) THEN
-    EXECUTE 'ALTER FUNCTION public.update_updated_at() SET search_path = pg_catalog, public';
-  END IF;
+  FOREACH fname IN ARRAY func_names LOOP
+    IF EXISTS (
+      SELECT 1 FROM pg_proc p
+      JOIN pg_namespace n ON n.oid = p.pronamespace
+      WHERE n.nspname = 'public' AND p.proname = fname
+        AND pg_get_function_identity_arguments(p.oid) = ''
+    ) THEN
+      EXECUTE format(
+        'ALTER FUNCTION public.%I() SET search_path = pg_catalog, public',
+        fname
+      );
+    END IF;
+  END LOOP;
 END $$;
 
 -- ─── 2. ENABLE RLS ON ACTIVE-SCHEMA TABLES MISSING FROM 0001 ────────────────
