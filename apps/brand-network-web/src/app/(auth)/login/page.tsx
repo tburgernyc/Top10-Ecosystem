@@ -40,7 +40,7 @@ export default function LoginPage() {
 
         <p style={{ color: 'var(--color-text-tertiary)', textAlign: 'center', fontSize: '0.875rem', marginTop: '1.5rem' }}>
           New customer?{' '}
-          <Link href="/register" style={{ color: 'var(--color-brand-primary)', textDecoration: 'none', transition: `opacity 0.2s var(--ease-luxury)` }}>
+          <Link href="/register" style={{ color: 'var(--color-primary)', textDecoration: 'none', transition: `opacity 0.2s var(--ease-luxury)` }}>
             Create an account
           </Link>
         </p>

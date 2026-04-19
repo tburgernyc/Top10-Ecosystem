@@ -25,7 +25,7 @@ export default function SubdomainNotFound() {
         </h1>
         <p
           style={{
-            color: 'var(--color-text-secondary)',
+            color: 'var(--color-text-muted)',
             fontSize: '1.125rem',
             maxWidth: '480px',
             margin: '0 auto 2.5rem',

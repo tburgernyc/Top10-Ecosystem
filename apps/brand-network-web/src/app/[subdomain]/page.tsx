@@ -87,7 +87,7 @@ export default async function SubdomainPage({ params }: Props) {
 
         <p
           style={{
-            color: 'var(--color-text-secondary)',
+            color: 'var(--color-text-muted)',
             fontSize: '1.25rem',
             maxWidth: '560px',
             marginBottom: '3rem',
@@ -144,9 +144,9 @@ export default async function SubdomainPage({ params }: Props) {
                     display: 'flex',
                     justifyContent: 'space-between',
                     padding: '0.5rem 0',
-                    borderBottom: '1px solid var(--color-surface-border)',
+                    borderBottom: '1px solid var(--color-border)',
                     fontSize: '0.875rem',
-                    color: 'var(--color-text-secondary)',
+                    color: 'var(--color-text-muted)',
                   }}
                 >
                   <span style={{ textTransform: 'capitalize' }}>{day}</span>
@@ -159,14 +159,14 @@ export default async function SubdomainPage({ params }: Props) {
           {/* Contact */}
           <div className="glass-card" style={{ padding: '2rem' }}>
             <p className="label-luxury" style={{ marginBottom: '1.25rem' }}>Visit Us</p>
-            <p style={{ color: 'var(--color-text-secondary)', marginBottom: '0.5rem', lineHeight: 1.6 }}>
+            <p style={{ color: 'var(--color-text-muted)', marginBottom: '0.5rem', lineHeight: 1.6 }}>
               {tenant!.address}<br />
               {tenant!.city}, {tenant!.state} {tenant!.zip}
             </p>
             <p style={{ color: 'var(--color-brand-secondary)', fontSize: '0.875rem' }}>
               {tenant!.phone}
             </p>
-            <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
               {tenant!.email}
             </p>
           </div>
@@ -184,7 +184,7 @@ export default async function SubdomainPage({ params }: Props) {
           >
             <div>
               <p className="label-luxury" style={{ marginBottom: '0.75rem' }}>Ready to Find Your Dress?</p>
-              <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.6, fontSize: '0.9375rem' }}>
+              <p style={{ color: 'var(--color-text-muted)', lineHeight: 1.6, fontSize: '0.9375rem' }}>
                 Book a personal styling session with one of our expert stylists today.
               </p>
             </div>
@@ -224,7 +224,7 @@ export default async function SubdomainPage({ params }: Props) {
                     <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.125rem', fontWeight: 600 }}>
                       {dress.name}
                     </p>
-                    <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
+                    <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
                       {dress.designer}
                     </p>
                     <p style={{ color: 'var(--color-brand-secondary)', fontWeight: 700, marginTop: '0.75rem' }}>

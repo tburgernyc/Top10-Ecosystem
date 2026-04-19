@@ -37,7 +37,7 @@ export default function GateLoginForm({ attemptsRemaining }: Props) {
       )}
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-        <label style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>Email</label>
+        <label style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>Email</label>
         <input
           type="email"
           className="input-luxury"
@@ -50,7 +50,7 @@ export default function GateLoginForm({ attemptsRemaining }: Props) {
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-        <label style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>Password</label>
+        <label style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>Password</label>
         <input
           type="password"
           className="input-luxury"

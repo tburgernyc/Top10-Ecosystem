@@ -154,7 +154,7 @@ export default async function GuardianPortalPage({ params, searchParams }: Guard
           <h1 className="heading-display" style={{ fontSize: 'clamp(1.75rem, 5vw, 3rem)', lineHeight: 1.1, marginBottom: '0.75rem' }}>
             {customer.first_name}&apos;s Top 10 Prom
           </h1>
-          <p style={{ color: 'var(--color-text-secondary)' }}>
+          <p style={{ color: 'var(--color-text-muted)' }}>
             Hi {guardian.first_name} — here&apos;s a read-only view of {customer.first_name}&apos;s reservations and appointments.
           </p>
           <div className="glass-card" style={{ padding: '0.875rem 1.25rem', marginTop: '1.25rem', display: 'inline-block' }}>
@@ -177,7 +177,7 @@ export default async function GuardianPortalPage({ params, searchParams }: Guard
                   <div style={{ flex: 1, minWidth: '180px' }}>
                     <p className="label-luxury" style={{ marginBottom: '0.25rem' }}>{r.designer ?? 'House Collection'}</p>
                     <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.125rem', fontWeight: 600, marginBottom: '0.5rem' }}>{r.dress_name}</h3>
-                    <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem', marginBottom: '0.25rem' }}>{r.color_name} · Size {r.size}</p>
+                    <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem', marginBottom: '0.25rem' }}>{r.color_name} · Size {r.size}</p>
                     {r.price && <p style={{ color: 'var(--color-brand-secondary)', fontWeight: 600 }}>${r.price}</p>}
                     <span style={{ display: 'inline-block', marginTop: '0.5rem', padding: '0.25rem 0.75rem', borderRadius: 'var(--radius-pill)', background: r.reservation_status === 'active' ? 'rgba(50,215,75,0.15)' : 'rgba(255,69,58,0.15)', color: r.reservation_status === 'active' ? 'var(--color-success)' : 'var(--color-error)', fontSize: '0.75rem', fontWeight: 600 }}>
                       {r.reservation_status.toUpperCase()}
@@ -199,14 +199,14 @@ export default async function GuardianPortalPage({ params, searchParams }: Guard
                     <div>
                       <p className="label-luxury" style={{ marginBottom: '0.25rem' }}>Confirmation · {a.confirmation_code}</p>
                       <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.125rem', fontWeight: 600 }}>{a.tenant_name}</h3>
-                      {a.tenant_address && <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem', marginTop: '0.25rem' }}>{a.tenant_address}</p>}
-                      {a.tenant_phone && <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>{a.tenant_phone}</p>}
+                      {a.tenant_address && <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem', marginTop: '0.25rem' }}>{a.tenant_address}</p>}
+                      {a.tenant_phone && <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>{a.tenant_phone}</p>}
                     </div>
                     <div style={{ textAlign: 'right' }}>
-                      <p style={{ color: 'var(--color-text-primary)', fontWeight: 600 }}>
+                      <p style={{ color: 'var(--color-text)', fontWeight: 600 }}>
                         {new Date(a.appointment_date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
                       </p>
-                      <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>
+                      <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>
                         {new Date(a.appointment_date).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
                       </p>
                     </div>
@@ -219,7 +219,7 @@ export default async function GuardianPortalPage({ params, searchParams }: Guard
 
         {activeReservations.length === 0 && upcomingAppointments.length === 0 && (
           <div className="glass-card" style={{ padding: '3rem', textAlign: 'center' }}>
-            <p style={{ color: 'var(--color-text-secondary)' }}>No reservations or appointments found yet.</p>
+            <p style={{ color: 'var(--color-text-muted)' }}>No reservations or appointments found yet.</p>
           </div>
         )}
       </div>

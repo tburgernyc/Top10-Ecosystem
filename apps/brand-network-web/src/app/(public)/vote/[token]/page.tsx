@@ -105,7 +105,7 @@ export default async function VotePage({ params }: VotePageProps) {
           >
             {data.session.title ?? 'Help me pick! 💖'}
           </h1>
-          <p style={{ color: 'var(--color-text-secondary)', marginTop: '1rem', fontSize: '0.9375rem' }}>
+          <p style={{ color: 'var(--color-text-muted)', marginTop: '1rem', fontSize: '0.9375rem' }}>
             Expires {new Date(data.session.expires_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
           </p>
         </div>

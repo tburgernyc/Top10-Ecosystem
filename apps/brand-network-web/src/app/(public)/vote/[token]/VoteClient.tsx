@@ -28,7 +28,7 @@ interface VoteClientProps {
 type VoteType = 'love' | 'like' | 'maybe' | 'pass';
 
 const VOTE_OPTIONS: { type: VoteType; emoji: string; label: string; color: string }[] = [
-  { type: 'love', emoji: '💖', label: 'Love it', color: 'var(--color-brand-primary)' },
+  { type: 'love', emoji: '💖', label: 'Love it', color: 'var(--color-primary)' },
   { type: 'like', emoji: '👍', label: 'Like it', color: 'var(--color-success)' },
   { type: 'maybe', emoji: '🤔', label: 'Maybe', color: 'var(--color-warning)' },
   { type: 'pass', emoji: '👎', label: 'Pass', color: 'var(--color-text-tertiary)' },
@@ -82,7 +82,7 @@ export default function VoteClient({ sessionId: _sessionId, shareToken, dresses,
         <h2 className="heading-section" style={{ marginBottom: '0.75rem' }}>
           Thanks{displayName ? `, ${displayName}` : ''}!
         </h2>
-        <p style={{ color: 'var(--color-text-secondary)' }}>
+        <p style={{ color: 'var(--color-text-muted)' }}>
           Your votes have been counted. The results will help pick the perfect dress.
         </p>
       </div>
@@ -132,11 +132,11 @@ export default function VoteClient({ sessionId: _sessionId, shareToken, dresses,
                       onClick={() => handleVote(dress.id, opt.type)}
                       disabled={submitted}
                       style={{
-                        background: isSelected ? opt.color : 'var(--color-surface-glass)',
-                        border: `1px solid ${isSelected ? opt.color : 'var(--color-surface-border)'}`,
+                        background: isSelected ? opt.color : 'var(--color-bg-glass)',
+                        border: `1px solid ${isSelected ? opt.color : 'var(--color-border)'}`,
                         borderRadius: 'var(--radius-pill)',
                         padding: '0.5rem 1rem',
-                        color: isSelected ? (opt.type === 'love' || opt.type === 'like' ? 'var(--color-text-inverse)' : 'var(--color-text-primary)') : 'var(--color-text-secondary)',
+                        color: isSelected ? (opt.type === 'love' || opt.type === 'like' ? 'var(--color-text-inverse)' : 'var(--color-text)') : 'var(--color-text-muted)',
                         fontSize: '0.875rem',
                         cursor: submitted ? 'not-allowed' : 'pointer',
                         transition: 'all var(--duration-fast) var(--ease-in-out-silk)',
@@ -161,7 +161,7 @@ export default function VoteClient({ sessionId: _sessionId, shareToken, dresses,
 
       <div className="glass-card" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <div>
-          <label style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem', display: 'block', marginBottom: '0.5rem' }}>
+          <label style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem', display: 'block', marginBottom: '0.5rem' }}>
             Your name (optional)
           </label>
           <input

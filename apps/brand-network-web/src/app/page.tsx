@@ -22,7 +22,7 @@ export default function SplashPage() {
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
-        background: 'var(--color-bg-noir)',
+        background: 'var(--color-bg)',
       }}
     >
       {/* Full-screen video background */}
@@ -81,12 +81,12 @@ export default function SplashPage() {
           }}
         >
           TOP 10<br />
-          <span style={{ color: 'var(--color-brand-primary)', fontStyle: 'italic' }}>PROM</span>
+          <span style={{ color: 'var(--color-primary)', fontStyle: 'italic' }}>PROM</span>
         </h1>
 
         <p
           style={{
-            color: 'var(--color-text-secondary)',
+            color: 'var(--color-text-muted)',
             fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
             maxWidth: '560px',
             margin: '0 auto 3rem',

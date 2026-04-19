@@ -28,7 +28,7 @@ export default function LoginForm() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-        <label htmlFor="login-email" style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>Email</label>
+        <label htmlFor="login-email" style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>Email</label>
         <input
           id="login-email"
           type="email"
@@ -42,7 +42,7 @@ export default function LoginForm() {
         />
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-        <label htmlFor="login-password" style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>Password</label>
+        <label htmlFor="login-password" style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>Password</label>
         <input
           id="login-password"
           type="password"
@@ -81,7 +81,7 @@ export default function LoginForm() {
           textDecoration: 'none',
           transition: `color 0.2s var(--ease-luxury)`,
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-brand-primary)')}
+        onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-primary)')}
         onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-text-tertiary)')}
       >
         Forgot your password?

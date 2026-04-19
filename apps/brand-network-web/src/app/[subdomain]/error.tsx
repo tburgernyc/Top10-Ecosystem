@@ -32,7 +32,7 @@ export default function SubdomainError({ error, reset }: Props) {
         <h2 className="heading-display" style={{ fontSize: '2rem', marginBottom: '1rem' }}>
           Boutique Unavailable
         </h2>
-        <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.7, marginBottom: '2rem' }}>
+        <p style={{ color: 'var(--color-text-muted)', lineHeight: 1.7, marginBottom: '2rem' }}>
           We had trouble loading this boutique. Your data is safe. Please retry or contact us if the issue continues.
         </p>
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
