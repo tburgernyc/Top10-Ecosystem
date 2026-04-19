@@ -26,7 +26,7 @@ export default function Footer() {
     <footer
       style={{
         background: 'var(--color-bg-elevated)',
-        borderTop: '1px solid var(--color-surface-border)',
+        borderTop: '1px solid var(--color-border)',
         padding: '4rem 0 2rem',
         marginTop: 'auto',
       }}
@@ -76,7 +76,7 @@ export default function Footer() {
 
         <div
           style={{
-            borderTop: '1px solid var(--color-surface-border)',
+            borderTop: '1px solid var(--color-border)',
             paddingTop: '2rem',
             display: 'flex',
             justifyContent: 'space-between',

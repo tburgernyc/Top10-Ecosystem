@@ -57,7 +57,7 @@ export default async function AssociateTaskView({ tenantId, userId, stylistId }:
     <div className="glass-card" style={{ padding: '1.5rem' }}>
       <p className="label-luxury" style={{ marginBottom: '1.25rem' }}>Today&apos;s Schedule</p>
       {todayAppointments.length === 0 ? (
-        <p style={{ color: 'var(--color-text-secondary)', textAlign: 'center', padding: '2rem 0' }}>
+        <p style={{ color: 'var(--color-text-muted)', textAlign: 'center', padding: '2rem 0' }}>
           No appointments today
         </p>
       ) : (
@@ -68,8 +68,8 @@ export default async function AssociateTaskView({ tenantId, userId, stylistId }:
               style={{
                 padding: '1rem',
                 borderRadius: 'var(--radius-md)',
-                background: 'var(--color-surface-glass)',
-                border: '1px solid var(--color-surface-border)',
+                background: 'var(--color-bg-glass)',
+                border: '1px solid var(--color-border)',
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -77,7 +77,7 @@ export default async function AssociateTaskView({ tenantId, userId, stylistId }:
                   <p style={{ fontWeight: 600, fontSize: '1rem' }}>
                     {appt.customer_first_name} {appt.customer_last_name}
                   </p>
-                  <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
+                  <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
                     {appt.service_type} · {new Date(appt.appointment_date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </p>
                 </div>

@@ -46,7 +46,7 @@ export default async function ClientProfile({ tenantId, userId }: Props) {
     <div className="glass-card" style={{ padding: '1.5rem' }}>
       <p className="label-luxury" style={{ marginBottom: '1.25rem' }}>Style Profiles</p>
       {profiles.length === 0 ? (
-        <p style={{ color: 'var(--color-text-secondary)', textAlign: 'center', padding: '2rem 0', fontSize: '0.875rem' }}>
+        <p style={{ color: 'var(--color-text-muted)', textAlign: 'center', padding: '2rem 0', fontSize: '0.875rem' }}>
           No client profiles yet
         </p>
       ) : (
@@ -57,12 +57,12 @@ export default async function ClientProfile({ tenantId, userId }: Props) {
               style={{
                 padding: '1rem',
                 borderRadius: 'var(--radius-md)',
-                background: 'var(--color-surface-glass)',
-                border: '1px solid var(--color-surface-border)',
+                background: 'var(--color-bg-glass)',
+                border: '1px solid var(--color-border)',
               }}
             >
               {profile.preferred_designers && profile.preferred_designers.length > 0 && (
-                <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)' }}>
+                <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>
                   Designers: {profile.preferred_designers.join(', ')}
                 </p>
               )}

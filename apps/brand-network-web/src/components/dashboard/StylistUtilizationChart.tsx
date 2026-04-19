@@ -39,7 +39,7 @@ export default async function StylistUtilizationChart({ tenantId, userId }: Prop
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
       {stylistData.map(({ name, appointments: appts, utilization }) => (
         <div key={name} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <p style={{ width: '120px', fontSize: '0.875rem', color: 'var(--color-text-secondary)', flexShrink: 0 }}>
+          <p style={{ width: '120px', fontSize: '0.875rem', color: 'var(--color-text-muted)', flexShrink: 0 }}>
             {name}
           </p>
           <div
@@ -55,7 +55,7 @@ export default async function StylistUtilizationChart({ tenantId, userId }: Prop
               style={{
                 width: `${utilization}%`,
                 height: '100%',
-                background: 'linear-gradient(90deg, var(--color-brand-primary), var(--color-brand-accent))',
+                background: 'linear-gradient(90deg, var(--color-primary), var(--color-brand-accent))',
                 borderRadius: 'var(--radius-pill)',
                 transition: 'width 0.8s var(--ease-luxury)',
               }}

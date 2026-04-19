@@ -59,7 +59,7 @@ export default function DashboardNav({ user }: Props) {
           width: '240px',
           height: '100dvh',
           background: 'var(--color-bg-elevated)',
-          borderRight: '1px solid var(--color-surface-border)',
+          borderRight: '1px solid var(--color-border)',
           display: 'flex',
           flexDirection: 'column',
           padding: '1.5rem 1rem',
@@ -91,7 +91,7 @@ export default function DashboardNav({ user }: Props) {
                   gap: '0.75rem',
                   padding: '0.75rem 1rem',
                   borderRadius: 'var(--radius-md)',
-                  color: isActive ? 'var(--color-brand-primary)' : 'var(--color-text-secondary)',
+                  color: isActive ? 'var(--color-primary)' : 'var(--color-text-muted)',
                   background: isActive ? 'var(--color-surface-glass-md)' : 'transparent',
                   border: isActive ? '1px solid var(--color-surface-border-md)' : '1px solid transparent',
                   textDecoration: 'none',
@@ -108,7 +108,7 @@ export default function DashboardNav({ user }: Props) {
         </nav>
 
         <div className="glass-card" style={{ padding: '1rem', marginTop: 'auto' }}>
-          <p style={{ color: 'var(--color-text-primary)', fontSize: '0.875rem', fontWeight: 600 }}>
+          <p style={{ color: 'var(--color-text)', fontSize: '0.875rem', fontWeight: 600 }}>
             {user.first_name} {user.last_name}
           </p>
           <p style={{ color: 'var(--color-text-tertiary)', fontSize: '0.75rem', marginTop: '0.125rem' }}>
@@ -126,7 +126,7 @@ export default function DashboardNav({ user }: Props) {
           right: 0,
           zIndex: 50,
           background: 'rgba(11, 10, 14, 0.92)',
-          borderBottom: '1px solid var(--color-surface-border)',
+          borderBottom: '1px solid var(--color-border)',
           backdropFilter: 'blur(12px)',
           WebkitBackdropFilter: 'blur(12px)',
           padding: '0.75rem 1rem',
@@ -154,7 +154,7 @@ export default function DashboardNav({ user }: Props) {
                   alignItems: 'center',
                   padding: '0.5rem 1rem',
                   borderRadius: 'var(--radius-pill)',
-                  color: isActive ? 'var(--color-brand-primary)' : 'var(--color-text-secondary)',
+                  color: isActive ? 'var(--color-primary)' : 'var(--color-text-muted)',
                   background: isActive ? 'var(--color-surface-glass-md)' : 'transparent',
                   border: `1px solid ${isActive ? 'var(--color-surface-border-md)' : 'transparent'}`,
                   textDecoration: 'none',

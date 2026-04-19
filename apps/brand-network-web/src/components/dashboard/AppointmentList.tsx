@@ -56,7 +56,7 @@ export default async function AppointmentList({ tenantId, userId }: Props) {
 
   if (apptList.length === 0) {
     return (
-      <p style={{ color: 'var(--color-text-secondary)', textAlign: 'center', padding: '2rem 0', fontSize: '0.875rem' }}>
+      <p style={{ color: 'var(--color-text-muted)', textAlign: 'center', padding: '2rem 0', fontSize: '0.875rem' }}>
         No appointments today
       </p>
     );
@@ -70,8 +70,8 @@ export default async function AppointmentList({ tenantId, userId }: Props) {
           style={{
             padding: '1rem',
             borderRadius: 'var(--radius-md)',
-            background: 'var(--color-surface-glass)',
-            border: '1px solid var(--color-surface-border)',
+            background: 'var(--color-bg-glass)',
+            border: '1px solid var(--color-border)',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
@@ -81,7 +81,7 @@ export default async function AppointmentList({ tenantId, userId }: Props) {
             <p style={{ fontWeight: 600 }}>
               {appt.customer_first_name} {appt.customer_last_name}
             </p>
-            <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.75rem', marginTop: '0.25rem' }}>
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '0.75rem', marginTop: '0.25rem' }}>
               {appt.service_type} · {new Date(appt.appointment_date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
             </p>
           </div>

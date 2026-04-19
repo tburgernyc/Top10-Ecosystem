@@ -86,7 +86,7 @@ export default function AIStylistBot({ tenantId }: Props) {
           <div
             style={{
               padding: '1.25rem 1.5rem',
-              borderBottom: '1px solid var(--color-surface-border)',
+              borderBottom: '1px solid var(--color-border)',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
@@ -106,7 +106,7 @@ export default function AIStylistBot({ tenantId }: Props) {
               style={{
                 background: 'none',
                 border: 'none',
-                color: 'var(--color-text-secondary)',
+                color: 'var(--color-text-muted)',
                 cursor: 'pointer',
                 fontSize: '1.25rem',
                 padding: '0.25rem',
@@ -143,14 +143,14 @@ export default function AIStylistBot({ tenantId }: Props) {
                       ? '16px 16px 4px 16px'
                       : '16px 16px 16px 4px',
                     background: message.role === 'user'
-                      ? 'var(--color-brand-primary)'
+                      ? 'var(--color-primary)'
                       : 'var(--color-surface-glass-md)',
                     border: message.role === 'user'
                       ? 'none'
-                      : '1px solid var(--color-surface-border)',
+                      : '1px solid var(--color-border)',
                     color: message.role === 'user'
                       ? 'var(--color-text-inverse)'
-                      : 'var(--color-text-primary)',
+                      : 'var(--color-text)',
                     fontSize: '0.9375rem',
                     lineHeight: 1.5,
                   }}
@@ -167,7 +167,7 @@ export default function AIStylistBot({ tenantId }: Props) {
                     padding: '0.75rem 1rem',
                     borderRadius: '16px 16px 16px 4px',
                     background: 'var(--color-surface-glass-md)',
-                    border: '1px solid var(--color-surface-border)',
+                    border: '1px solid var(--color-border)',
                     display: 'flex',
                     gap: '4px',
                     alignItems: 'center',
@@ -197,7 +197,7 @@ export default function AIStylistBot({ tenantId }: Props) {
             onSubmit={handleSubmit}
             style={{
               padding: '1rem 1.5rem',
-              borderTop: '1px solid var(--color-surface-border)',
+              borderTop: '1px solid var(--color-border)',
               display: 'flex',
               gap: '0.75rem',
               flexShrink: 0,

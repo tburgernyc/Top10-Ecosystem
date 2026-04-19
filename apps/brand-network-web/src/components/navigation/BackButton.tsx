@@ -16,9 +16,9 @@ export default function BackButton() {
         padding: '0.5rem 1.25rem',
         borderRadius: 'var(--radius-pill)',
         border: '1px solid var(--color-surface-border-md)',
-        background: 'var(--color-surface-glass)',
+        background: 'var(--color-bg-glass)',
         backdropFilter: 'blur(12px)',
-        color: 'var(--color-text-secondary)',
+        color: 'var(--color-text-muted)',
         fontSize: '0.875rem',
         fontWeight: 500,
         cursor: 'pointer',
@@ -26,12 +26,12 @@ export default function BackButton() {
         letterSpacing: '0.01em',
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = 'var(--color-brand-primary)';
-        e.currentTarget.style.color = 'var(--color-text-primary)';
+        e.currentTarget.style.borderColor = 'var(--color-primary)';
+        e.currentTarget.style.color = 'var(--color-text)';
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.borderColor = 'var(--color-surface-border-md)';
-        e.currentTarget.style.color = 'var(--color-text-secondary)';
+        e.currentTarget.style.color = 'var(--color-text-muted)';
       }}
       aria-label="Go back"
     >

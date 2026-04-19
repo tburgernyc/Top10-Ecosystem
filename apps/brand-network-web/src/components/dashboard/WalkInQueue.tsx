@@ -31,7 +31,7 @@ export default async function WalkInQueue({ tenantId, userId, userRole }: Props)
 
   if (queue.length === 0) {
     return (
-      <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem', textAlign: 'center', padding: '2rem 0' }}>
+      <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem', textAlign: 'center', padding: '2rem 0' }}>
         No customers currently waiting
       </p>
     );
@@ -46,8 +46,8 @@ export default async function WalkInQueue({ tenantId, userId, userRole }: Props)
           style={{ padding: '1rem 1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
         >
           <div>
-            <p style={{ fontWeight: 600, color: 'var(--color-text-primary)' }}>{walkIn.customer_name}</p>
-            <p style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', marginTop: '0.25rem' }}>
+            <p style={{ fontWeight: 600, color: 'var(--color-text)' }}>{walkIn.customer_name}</p>
+            <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '0.25rem' }}>
               Party of {walkIn.party_size} · {walkIn.occasion ?? 'General'}
               {walkIn.estimated_wait_minutes != null && ` · ~${walkIn.estimated_wait_minutes}m wait`}
             </p>
