@@ -28,7 +28,7 @@ export default async function LocatorPage() {
       {/* Header */}
       <div
         className="mesh-bg"
-        style={{ padding: '4rem 2rem', textAlign: 'center', borderBottom: '1px solid var(--color-surface-border)' }}
+        style={{ padding: '4rem 2rem', textAlign: 'center', borderBottom: '1px solid var(--color-border)' }}
       >
         <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '1.5rem' }}>
           <BackButton />
@@ -37,7 +37,7 @@ export default async function LocatorPage() {
         <h1 className="heading-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}>
           Find Your Boutique
         </h1>
-        <p style={{ color: 'var(--color-text-secondary)', marginTop: '1rem', fontSize: '1.125rem' }}>
+        <p style={{ color: 'var(--color-text-muted)', marginTop: '1rem', fontSize: '1.125rem' }}>
           Luxury boutiques across the nation, each with exclusive inventory.
         </p>
       </div>

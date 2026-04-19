@@ -60,7 +60,7 @@ export default async function HomePage() {
         </h1>
         <p
           style={{
-            color: 'var(--color-text-secondary)',
+            color: 'var(--color-text-muted)',
             fontSize: 'clamp(1rem, 2vw, 1.25rem)',
             maxWidth: '600px',
             lineHeight: 1.7,
@@ -116,7 +116,7 @@ export default async function HomePage() {
           <h2 className="heading-section" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', marginBottom: '1.5rem' }}>
             See It On You.<br />Before You Buy.
           </h2>
-          <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.7, fontSize: '1.0625rem', marginBottom: '2rem' }}>
+          <p style={{ color: 'var(--color-text-muted)', lineHeight: 1.7, fontSize: '1.0625rem', marginBottom: '2rem' }}>
             Our AI-powered Virtual Try-On lets you see exactly how any dress looks on your body,
             in any color — in under 10 seconds. Powered by generative diffusion technology.
           </p>
@@ -137,16 +137,16 @@ export default async function HomePage() {
       <section
         style={{
           padding: 'clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 4rem)',
-          background: 'var(--color-bg-noir)',
+          background: 'var(--color-bg)',
           textAlign: 'center',
         }}
       >
         <p className="label-luxury" style={{ marginBottom: '1rem' }}>Nationwide Reach</p>
         <h2 className="heading-section" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', marginBottom: '1.5rem' }}>
           {activeBoutiques} Locations.<br />
-          <span style={{ color: 'var(--color-brand-primary)' }}>One Standard of Excellence.</span>
+          <span style={{ color: 'var(--color-primary)' }}>One Standard of Excellence.</span>
         </h2>
-        <p style={{ color: 'var(--color-text-secondary)', fontSize: '1.0625rem', maxWidth: '600px', margin: '0 auto 3rem', lineHeight: 1.7 }}>
+        <p style={{ color: 'var(--color-text-muted)', fontSize: '1.0625rem', maxWidth: '600px', margin: '0 auto 3rem', lineHeight: 1.7 }}>
           Each boutique in our network carries exclusive designer inventory and is staffed by expert stylists trained to deliver a luxury experience.
         </p>
         <Link href="/locator" className="btn-ghost">View All Locations</Link>
@@ -174,7 +174,7 @@ export default async function HomePage() {
               <div key={title} className="bento-card">
                 <span style={{ fontSize: '2rem', marginBottom: '1.25rem', display: 'block', color: 'var(--color-brand-secondary)' }}>{icon}</span>
                 <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.375rem', fontWeight: 600, marginBottom: '0.75rem' }}>{title}</h3>
-                <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.6, fontSize: '0.9375rem' }}>{desc}</p>
+                <p style={{ color: 'var(--color-text-muted)', lineHeight: 1.6, fontSize: '0.9375rem' }}>{desc}</p>
               </div>
             ))}
           </div>

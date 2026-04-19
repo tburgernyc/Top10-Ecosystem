@@ -111,12 +111,12 @@ export default function TryOnForm() {
         <div
           {...getRootProps()}
           style={{
-            border: `2px dashed ${isDragActive ? 'var(--color-brand-primary)' : 'var(--color-surface-border-md)'}`,
+            border: `2px dashed ${isDragActive ? 'var(--color-primary)' : 'var(--color-surface-border-md)'}`,
             borderRadius: 'var(--radius-lg)',
             padding: '3rem 2rem',
             textAlign: 'center',
             cursor: 'pointer',
-            background: isDragActive ? 'var(--color-surface-glass-md)' : 'var(--color-surface-glass)',
+            background: isDragActive ? 'var(--color-surface-glass-md)' : 'var(--color-bg-glass)',
             transition: 'all 0.2s ease',
             minHeight: '300px',
             display: 'flex',
@@ -142,7 +142,7 @@ export default function TryOnForm() {
           ) : (
             <>
               <span style={{ fontSize: '3rem' }}>↑</span>
-              <p style={{ color: 'var(--color-text-primary)', fontWeight: 600 }}>
+              <p style={{ color: 'var(--color-text)', fontWeight: 600 }}>
                 {isDragActive ? 'Drop your photo here' : 'Drag & drop or click to upload'}
               </p>
               <p style={{ color: 'var(--color-text-tertiary)', fontSize: '0.875rem' }}>
@@ -194,13 +194,13 @@ export default function TryOnForm() {
                   width: '48px',
                   height: '48px',
                   borderRadius: '50%',
-                  border: '3px solid var(--color-surface-border)',
+                  border: '3px solid var(--color-border)',
                   borderTopColor: 'var(--color-brand-accent)',
                   animation: 'tryon-spin 1s linear infinite',
                   margin: '0 auto 1rem',
                 }}
               />
-              <p style={{ color: 'var(--color-text-secondary)' }}>
+              <p style={{ color: 'var(--color-text-muted)' }}>
                 {status === 'uploading' ? 'Uploading your photo…' : 'Generating your look…'}
               </p>
               <p style={{ color: 'var(--color-text-tertiary)', fontSize: '0.875rem', marginTop: '0.5rem' }}>
@@ -231,7 +231,7 @@ export default function TryOnForm() {
           {status === 'failed' && (
             <div style={{ textAlign: 'center', padding: '2rem' }}>
               <p style={{ color: 'var(--color-error)', fontWeight: 600, marginBottom: '0.5rem' }}>Generation Failed</p>
-              <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem', marginBottom: '1.5rem' }}>
+              <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem', marginBottom: '1.5rem' }}>
                 {error ?? 'Please try again with a clear front-facing photo.'}
               </p>
               <button

@@ -66,7 +66,7 @@ function BookingWizardInner() {
         <div style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>✓</div>
         <p className="label-luxury" style={{ color: 'var(--color-success)', marginBottom: '0.75rem' }}>Confirmed</p>
         <h2 className="heading-display" style={{ fontSize: '2rem', marginBottom: '1rem' }}>You&apos;re Booked!</h2>
-        <p style={{ color: 'var(--color-text-secondary)', marginBottom: '0.5rem' }}>Confirmation Code</p>
+        <p style={{ color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>Confirmation Code</p>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '1.5rem', color: 'var(--color-brand-secondary)', fontWeight: 700 }}>
           {confirmationCode}
         </p>
@@ -86,7 +86,7 @@ function BookingWizardInner() {
               height: '4px',
               borderRadius: 'var(--radius-pill)',
               background: i <= currentStepIndex
-                ? 'var(--color-brand-primary)'
+                ? 'var(--color-primary)'
                 : 'var(--color-surface-border-md)',
               transition: 'background 0.3s ease',
             }}
@@ -132,15 +132,15 @@ function BookingWizardInner() {
                 style={{
                   padding: '1.25rem',
                   borderRadius: 'var(--radius-md)',
-                  border: `1px solid ${serviceId === service.id ? 'var(--color-brand-primary)' : 'var(--color-surface-border)'}`,
-                  background: serviceId === service.id ? 'var(--color-surface-glass-md)' : 'var(--color-surface-glass)',
+                  border: `1px solid ${serviceId === service.id ? 'var(--color-primary)' : 'var(--color-border)'}`,
+                  background: serviceId === service.id ? 'var(--color-surface-glass-md)' : 'var(--color-bg-glass)',
                   cursor: 'pointer',
                   textAlign: 'left',
                   transition: 'all 0.2s ease',
                 }}
               >
-                <p style={{ fontWeight: 600, color: 'var(--color-text-primary)' }}>{service.label}</p>
-                <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
+                <p style={{ fontWeight: 600, color: 'var(--color-text)' }}>{service.label}</p>
+                <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
                   {service.description} · {service.duration} min
                 </p>
               </button>
@@ -173,9 +173,9 @@ function BookingWizardInner() {
                 style={{
                   padding: '0.75rem 0.5rem',
                   borderRadius: 'var(--radius-md)',
-                  border: `1px solid ${selectedTime === time ? 'var(--color-brand-primary)' : 'var(--color-surface-border)'}`,
+                  border: `1px solid ${selectedTime === time ? 'var(--color-primary)' : 'var(--color-border)'}`,
                   background: selectedTime === time ? 'var(--color-surface-glass-md)' : 'transparent',
-                  color: selectedTime === time ? 'var(--color-brand-primary)' : 'var(--color-text-secondary)',
+                  color: selectedTime === time ? 'var(--color-primary)' : 'var(--color-text-muted)',
                   cursor: 'pointer',
                   fontSize: '0.875rem',
                   transition: 'all 0.2s ease',
@@ -212,7 +212,7 @@ function BookingWizardInner() {
                 ['Time', selectedTime],
               ] as [string, string][]).map(([label, value]) => (
                 <div key={label} style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>{label}</p>
+                  <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>{label}</p>
                   <p style={{ fontWeight: 600 }}>{value}</p>
                 </div>
               ))}

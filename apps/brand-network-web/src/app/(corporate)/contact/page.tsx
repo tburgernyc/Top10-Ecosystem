@@ -25,7 +25,7 @@ export default function ContactPage() {
             { label: 'Phone (optional)', type: 'tel', id: 'contact-phone', placeholder: '(555) 000-0000', autoComplete: 'tel' },
           ].map(({ label, type, id, placeholder, autoComplete }) => (
             <div key={id} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <label htmlFor={id} style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>{label}</label>
+              <label htmlFor={id} style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>{label}</label>
               <input
                 id={id}
                 type={type}
@@ -38,7 +38,7 @@ export default function ContactPage() {
           ))}
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <label htmlFor="contact-message" style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>Message</label>
+            <label htmlFor="contact-message" style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>Message</label>
             <textarea
               id="contact-message"
               className="input-luxury"
@@ -58,7 +58,7 @@ export default function ContactPage() {
           </button>
         </div>
 
-        <div style={{ textAlign: 'center', marginTop: '2rem', color: 'var(--color-text-secondary)' }}>
+        <div style={{ textAlign: 'center', marginTop: '2rem', color: 'var(--color-text-muted)' }}>
           <p>Corporate Inquiries: <span style={{ color: 'var(--color-brand-secondary)' }}>info@toptenprom.com</span></p>
           <p style={{ marginTop: '0.5rem' }}>Press: <span style={{ color: 'var(--color-brand-secondary)' }}>press@toptenprom.com</span></p>
         </div>

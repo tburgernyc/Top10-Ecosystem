@@ -19,10 +19,10 @@ export default function AboutPage() {
         </p>
         <h1 className="heading-display" style={{ fontSize: 'clamp(2.5rem, 7vw, 6rem)', lineHeight: 1.05, marginBottom: '2rem' }}>
           Built for the<br />
-          <span style={{ color: 'var(--color-brand-primary)', fontStyle: 'italic' }}>Extraordinary</span><br />
+          <span style={{ color: 'var(--color-primary)', fontStyle: 'italic' }}>Extraordinary</span><br />
           Moment.
         </h1>
-        <p style={{ color: 'var(--color-text-secondary)', fontSize: '1.125rem', lineHeight: 1.8 }}>
+        <p style={{ color: 'var(--color-text-muted)', fontSize: '1.125rem', lineHeight: 1.8 }}>
           Top 10 Prom was founded with a singular vision: that every young woman deserves a world-class
           styling experience for the most important nights of her life. We built a network of 55 boutiques,
           each with hand-curated designer collections, AI-powered styling tools, and a team of experts
@@ -66,7 +66,7 @@ export default function AboutPage() {
               <div key={title} className="bento-card">
                 <span style={{ fontSize: '2rem', display: 'block', marginBottom: '1.25rem', color: 'var(--color-brand-secondary)' }}>{icon}</span>
                 <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.375rem', fontWeight: 600, marginBottom: '0.75rem' }}>{title}</h3>
-                <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.7 }}>{desc}</p>
+                <p style={{ color: 'var(--color-text-muted)', lineHeight: 1.7 }}>{desc}</p>
               </div>
             ))}
           </div>
@@ -77,7 +77,7 @@ export default function AboutPage() {
       <section
         style={{
           padding: 'clamp(4rem, 8vw, 8rem) 2rem',
-          background: 'var(--color-bg-noir)',
+          background: 'var(--color-bg)',
           textAlign: 'center',
         }}
       >

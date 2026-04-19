@@ -66,14 +66,14 @@ export default function LocatorMap({ locations }: Props) {
       <div
         style={{
           background: 'var(--color-bg-elevated)',
-          borderRight: '1px solid var(--color-surface-border)',
+          borderRight: '1px solid var(--color-border)',
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden',
         }}
       >
         {/* Search — font-size 1rem mandatory for iOS auto-zoom prevention */}
-        <div style={{ padding: '1.25rem', borderBottom: '1px solid var(--color-surface-border)' }}>
+        <div style={{ padding: '1.25rem', borderBottom: '1px solid var(--color-border)' }}>
           <input
             id="locator-search"
             type="search"
@@ -97,7 +97,7 @@ export default function LocatorMap({ locations }: Props) {
                   width: '100%',
                   padding: '1rem',
                   borderRadius: 'var(--radius-md)',
-                  border: `1px solid ${selectedLocation?.id === location.id ? 'var(--color-brand-primary)' : 'transparent'}`,
+                  border: `1px solid ${selectedLocation?.id === location.id ? 'var(--color-primary)' : 'transparent'}`,
                   background: selectedLocation?.id === location.id
                     ? 'var(--color-surface-glass-md)'
                     : 'transparent',
@@ -107,10 +107,10 @@ export default function LocatorMap({ locations }: Props) {
                   marginBottom: '0.5rem',
                 }}
               >
-                <p style={{ fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '0.25rem' }}>
+                <p style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '0.25rem' }}>
                   {location.name}
                 </p>
-                <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>
+                <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>
                   {location.city}, {location.state}
                 </p>
                 {selectedLocation?.id === location.id && (
@@ -147,7 +147,7 @@ export default function LocatorMap({ locations }: Props) {
           <p style={{ color: 'var(--color-text-tertiary)', fontSize: '0.875rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
             Map preview unavailable
           </p>
-          <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.8125rem' }}>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '0.8125rem' }}>
             Configure <code>NEXT_PUBLIC_GOOGLE_MAPS_API_KEY</code> to enable the map.
           </p>
         </div>

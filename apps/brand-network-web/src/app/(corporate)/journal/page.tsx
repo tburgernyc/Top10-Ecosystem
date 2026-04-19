@@ -41,7 +41,7 @@ export default function JournalPage() {
   return (
     <div style={{ paddingTop: '7rem' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}>
-        <div style={{ padding: 'clamp(2rem, 5vw, 4rem) 0', borderBottom: '1px solid var(--color-surface-border)', marginBottom: '3rem' }}>
+        <div style={{ padding: 'clamp(2rem, 5vw, 4rem) 0', borderBottom: '1px solid var(--color-border)', marginBottom: '3rem' }}>
           <p className="label-luxury" style={{ marginBottom: '1rem' }}>Editorial</p>
           <h1 className="heading-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}>The Journal</h1>
         </div>
@@ -68,7 +68,7 @@ export default function JournalPage() {
                 <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.375rem', fontWeight: 600, marginBottom: '0.75rem', lineHeight: 1.3 }}>
                   {post.title}
                 </h2>
-                <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9375rem', lineHeight: 1.6, marginBottom: '1.25rem' }}>
+                <p style={{ color: 'var(--color-text-muted)', fontSize: '0.9375rem', lineHeight: 1.6, marginBottom: '1.25rem' }}>
                   {post.excerpt}
                 </p>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -76,7 +76,7 @@ export default function JournalPage() {
                   <Link
                     href={`/journal/${post.slug}`}
                     style={{
-                      color: 'var(--color-brand-primary)',
+                      color: 'var(--color-primary)',
                       fontSize: '0.875rem',
                       textDecoration: 'none',
                       fontWeight: 600,

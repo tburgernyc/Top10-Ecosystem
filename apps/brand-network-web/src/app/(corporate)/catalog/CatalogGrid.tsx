@@ -31,9 +31,9 @@ function FilterPill({
       style={{
         padding: '0.5rem 1.25rem',
         borderRadius: 'var(--radius-pill)',
-        border: `1px solid ${current === value ? 'var(--color-brand-primary)' : 'var(--color-surface-border)'}`,
+        border: `1px solid ${current === value ? 'var(--color-primary)' : 'var(--color-border)'}`,
         background: current === value ? 'rgba(242,75,154,0.12)' : 'transparent',
-        color: current === value ? 'var(--color-brand-primary)' : 'var(--color-text-secondary)',
+        color: current === value ? 'var(--color-primary)' : 'var(--color-text-muted)',
         cursor: 'pointer',
         fontSize: '0.875rem',
         fontWeight: current === value ? 600 : 400,
@@ -83,7 +83,7 @@ export default function CatalogGrid({ dresses, designers, occasions }: Props) {
       <div
         style={{
           padding: '2rem 0',
-          borderBottom: '1px solid var(--color-surface-border)',
+          borderBottom: '1px solid var(--color-border)',
           display: 'flex',
           flexDirection: 'column',
           gap: '1.25rem',
@@ -123,8 +123,8 @@ export default function CatalogGrid({ dresses, designers, occasions }: Props) {
                   width: '40px',
                   height: '40px',
                   borderRadius: '50%',
-                  border: `2px solid ${selectedColor === 'all' ? 'var(--color-brand-primary)' : 'var(--color-surface-border)'}`,
-                  background: 'var(--color-surface-glass)',
+                  border: `2px solid ${selectedColor === 'all' ? 'var(--color-primary)' : 'var(--color-border)'}`,
+                  background: 'var(--color-bg-glass)',
                   cursor: 'pointer',
                   fontSize: '1.25rem',
                   transition: `border-color 0.2s var(--ease-luxury)`,
@@ -144,7 +144,7 @@ export default function CatalogGrid({ dresses, designers, occasions }: Props) {
                     width: '40px',
                     height: '40px',
                     borderRadius: '50%',
-                    border: `2px solid ${selectedColor === colorName ? 'var(--color-brand-primary)' : 'transparent'}`,
+                    border: `2px solid ${selectedColor === colorName ? 'var(--color-primary)' : 'transparent'}`,
                     overflow: 'hidden',
                     cursor: 'pointer',
                     flexShrink: 0,
@@ -166,8 +166,8 @@ export default function CatalogGrid({ dresses, designers, occasions }: Props) {
       </div>
 
       {/* Results count */}
-      <div style={{ padding: '1.5rem 0', borderBottom: '1px solid var(--color-surface-border)' }}>
-        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>
+      <div style={{ padding: '1.5rem 0', borderBottom: '1px solid var(--color-border)' }}>
+        <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>
           {filtered.length} {filtered.length === 1 ? 'style' : 'styles'} found
         </p>
       </div>
@@ -282,7 +282,7 @@ export default function CatalogGrid({ dresses, designers, occasions }: Props) {
                           height: '24px',
                           borderRadius: '50%',
                           overflow: 'hidden',
-                          border: '1px solid var(--color-surface-border)',
+                          border: '1px solid var(--color-border)',
                           backgroundImage: `url(${color.swatch_image_url})`,
                           backgroundSize: 'cover',
                           backgroundPosition: 'center',

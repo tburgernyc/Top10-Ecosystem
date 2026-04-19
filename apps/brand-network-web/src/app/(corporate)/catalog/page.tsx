@@ -30,7 +30,7 @@ export default async function CatalogPage() {
       {/* Header */}
       <div
         className="mesh-bg"
-        style={{ padding: '4rem 2rem 3rem', borderBottom: '1px solid var(--color-surface-border)' }}
+        style={{ padding: '4rem 2rem 3rem', borderBottom: '1px solid var(--color-border)' }}
       >
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <p className="label-luxury" style={{ marginBottom: '1rem' }}>Exclusive Collections</p>
