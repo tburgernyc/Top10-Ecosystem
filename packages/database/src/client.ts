@@ -1,6 +1,6 @@
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
-import * as schema from './schema.js';
+import * as schema from './schema';
 
 // ─── LAZY-INITIALIZED DATABASE CLIENT ────────────────────────────────────────
 // ARCHITECTURE RULE: The postgres connection is created LAZILY on first use.
