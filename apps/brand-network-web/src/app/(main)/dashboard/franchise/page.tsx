@@ -48,9 +48,9 @@ export default async function FranchisePage() {
         <h1 className="heading-section" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)' }}>
           Franchise Management
         </h1>
-        <p style={{ color: 'var(--color-text-secondary)', marginTop: '0.5rem', maxWidth: '560px' }}>
+        <p style={{ color: 'var(--color-text-muted)', marginTop: '0.5rem', maxWidth: '560px' }}>
           Onboard new boutique locations, view the full network, and manage active locations.{' '}
-          <strong style={{ color: 'var(--color-text-primary)' }}>{allTenants.filter((t) => t.is_active).length} of {allTenants.length} locations active.</strong>
+          <strong style={{ color: 'var(--color-text)' }}>{allTenants.filter((t) => t.is_active).length} of {allTenants.length} locations active.</strong>
         </p>
       </div>
 
@@ -71,7 +71,7 @@ export default async function FranchisePage() {
               </span>
             </div>
             <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.0625rem', fontWeight: 600, marginBottom: '0.375rem' }}>{tenant.name}</h3>
-            <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.8125rem', marginBottom: '0.25rem' }}>{tenant.city}, {tenant.state}</p>
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '0.8125rem', marginBottom: '0.25rem' }}>{tenant.city}, {tenant.state}</p>
             <p style={{ color: 'var(--color-text-tertiary)', fontSize: '0.75rem', fontFamily: 'var(--font-mono)' }}>
               {staffCountMap[tenant.id] ?? 0} staff members
             </p>

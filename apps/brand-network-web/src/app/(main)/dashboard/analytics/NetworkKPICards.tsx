@@ -19,7 +19,7 @@ export default function NetworkKPICards({ kpi, isSuperAdmin }: NetworkKPICardsPr
     ...(isSuperAdmin ? [{ label: 'Active Locations', value: kpi.totalActiveTenants, accent: 'var(--color-brand-secondary)' }] : []),
     { label: 'Appointments This Month', value: kpi.totalAppointmentsThisMonth.toLocaleString() },
     { label: 'Confirmation Rate', value: kpi.appointmentConfirmationRate, unit: '%', accent: kpi.appointmentConfirmationRate >= 80 ? 'var(--color-success)' : 'var(--color-warning)' },
-    { label: 'Active Reservations', value: kpi.totalReservationsActive.toLocaleString(), accent: 'var(--color-brand-primary)' },
+    { label: 'Active Reservations', value: kpi.totalReservationsActive.toLocaleString(), accent: 'var(--color-primary)' },
     { label: 'VTO Sessions', value: kpi.totalVtoSessionsThisMonth.toLocaleString(), accent: 'var(--color-brand-accent)' },
     { label: 'Avg Walk-In Wait', value: kpi.avgWalkInWaitMinutes, unit: ' min' },
     ...(isSuperAdmin ? [{ label: 'Inventory Utilization', value: kpi.networkReservationUtilization, unit: '%' }] : []),
@@ -50,14 +50,14 @@ export default function NetworkKPICards({ kpi, isSuperAdmin }: NetworkKPICardsPr
             style={{
               fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
               fontWeight: 700,
-              color: card.accent ?? 'var(--color-text-primary)',
+              color: card.accent ?? 'var(--color-text)',
               fontFamily: 'var(--font-mono)',
               lineHeight: 1,
             }}
           >
             {card.value}
             {card.unit && (
-              <span style={{ fontSize: '0.875rem', fontWeight: 400, color: 'var(--color-text-secondary)', marginLeft: '0.25rem' }}>
+              <span style={{ fontSize: '0.875rem', fontWeight: 400, color: 'var(--color-text-muted)', marginLeft: '0.25rem' }}>
                 {card.unit}
               </span>
             )}

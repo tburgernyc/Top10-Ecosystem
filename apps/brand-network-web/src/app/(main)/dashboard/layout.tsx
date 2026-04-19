@@ -7,7 +7,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
   const authUser = await requireDashboardSession();
 
   return (
-    <div style={{ display: 'flex', minHeight: '100dvh', background: 'var(--color-bg-noir)' }}>
+    <div style={{ display: 'flex', minHeight: '100dvh', background: 'var(--color-bg)' }}>
       <DashboardNav user={authUser} />
       <main
         style={{

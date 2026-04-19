@@ -65,7 +65,7 @@ export default async function BridalPartyPage() {
         <h1 className="heading-section" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)' }}>
           Bridal Party
         </h1>
-        <p style={{ color: 'var(--color-text-secondary)', marginTop: '0.5rem', maxWidth: '560px' }}>
+        <p style={{ color: 'var(--color-text-muted)', marginTop: '0.5rem', maxWidth: '560px' }}>
           Create or join a shopping group. Coordinate outfits and see each member&apos;s shortlisted dresses in one place.
         </p>
       </div>

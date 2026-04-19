@@ -46,7 +46,7 @@ export default function FranchiseOnboardingForm() {
   };
 
   const inputStyle = { display: 'flex', flexDirection: 'column' as const, gap: '0.375rem' };
-  const labelStyle: React.CSSProperties = { color: 'var(--color-text-secondary)', fontSize: '0.8125rem' };
+  const labelStyle: React.CSSProperties = { color: 'var(--color-text-muted)', fontSize: '0.8125rem' };
 
   return (
     <div className="glass-card" style={{ padding: '2rem', maxWidth: '720px' }}>
@@ -106,7 +106,7 @@ export default function FranchiseOnboardingForm() {
         </div>
       </div>
 
-      <div style={{ borderTop: '1px solid var(--color-surface-border)', paddingTop: '1.25rem', marginTop: '0.5rem', marginBottom: '1rem' }}>
+      <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '1.25rem', marginTop: '0.5rem', marginBottom: '1rem' }}>
         <p className="label-luxury" style={{ marginBottom: '0.875rem' }}>Owner Account</p>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
           <div style={inputStyle}>
@@ -133,9 +133,9 @@ export default function FranchiseOnboardingForm() {
             {result.message}
           </p>
           {result.inviteLink && (
-            <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.8125rem', wordBreak: 'break-all' }}>
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '0.8125rem', wordBreak: 'break-all' }}>
               Invite link:{' '}
-              <a href={result.inviteLink} style={{ color: 'var(--color-brand-primary)', textDecoration: 'none' }}>
+              <a href={result.inviteLink} style={{ color: 'var(--color-primary)', textDecoration: 'none' }}>
                 {result.inviteLink}
               </a>
             </p>

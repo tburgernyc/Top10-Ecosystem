@@ -105,11 +105,11 @@ export default function BridalPartyClient({ customerId: _customerId, parties }: 
         <div className="glass-card" style={{ padding: '2rem', maxWidth: '480px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <h2 className="heading-section" style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>Create a Party</h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <label style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>Party Name</label>
+            <label style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>Party Name</label>
             <input type="text" className="input-luxury" value={partyName} onChange={(e) => setPartyName(e.target.value)} placeholder="e.g. Madison's Prom Squad 2025" disabled={isPending} />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <label style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>Occasion</label>
+            <label style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>Occasion</label>
             <select className="input-luxury" value={occasion} onChange={(e) => setOccasion(e.target.value as typeof occasion)} disabled={isPending}>
               <option value="prom">Prom</option>
               <option value="wedding">Wedding</option>
@@ -117,7 +117,7 @@ export default function BridalPartyClient({ customerId: _customerId, parties }: 
             </select>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <label style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>School (optional)</label>
+            <label style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>School (optional)</label>
             <input type="text" className="input-luxury" value={schoolName} onChange={(e) => setSchoolName(e.target.value)} placeholder="e.g. Lincoln High School" disabled={isPending} />
           </div>
           {feedback && (
@@ -134,7 +134,7 @@ export default function BridalPartyClient({ customerId: _customerId, parties }: 
         <div className="glass-card" style={{ padding: '2rem', maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <h2 className="heading-section" style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>Join a Party</h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <label style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>Invite Code</label>
+            <label style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>Invite Code</label>
             <input type="text" className="input-luxury" value={inviteCode} onChange={(e) => setInviteCode(e.target.value.toLowerCase())} placeholder="e.g. a3f9c2b1..." disabled={isPending} />
           </div>
           {feedback && (

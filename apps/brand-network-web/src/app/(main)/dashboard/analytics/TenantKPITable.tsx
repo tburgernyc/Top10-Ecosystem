@@ -41,7 +41,7 @@ export default function TenantKPITable({ rows }: TenantKPITableProps) {
                   fontSize: '0.6875rem',
                   textTransform: 'uppercase',
                   letterSpacing: '0.1em',
-                  borderBottom: '1px solid var(--color-surface-border)',
+                  borderBottom: '1px solid var(--color-border)',
                   fontFamily: 'var(--font-ui)',
                   fontWeight: 500,
                   whiteSpace: 'nowrap',
@@ -61,7 +61,7 @@ export default function TenantKPITable({ rows }: TenantKPITableProps) {
               }}
             >
               <td style={{ padding: '0.875rem 1rem', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
-                <p style={{ fontWeight: 600, color: 'var(--color-text-primary)', fontSize: '0.9375rem', marginBottom: '0.125rem' }}>
+                <p style={{ fontWeight: 600, color: 'var(--color-text)', fontSize: '0.9375rem', marginBottom: '0.125rem' }}>
                   {row.tenantName}
                 </p>
                 <p style={{ color: 'var(--color-text-tertiary)', fontSize: '0.75rem', fontFamily: 'var(--font-mono)' }}>
@@ -77,7 +77,7 @@ export default function TenantKPITable({ rows }: TenantKPITableProps) {
                     borderBottom: '1px solid rgba(255,255,255,0.04)',
                     fontFamily: 'var(--font-mono)',
                     fontSize: '0.9375rem',
-                    color: key === 'activeReservations' ? 'var(--color-brand-primary)' : key === 'vtoSessionsThisMonth' ? 'var(--color-brand-accent)' : 'var(--color-text-primary)',
+                    color: key === 'activeReservations' ? 'var(--color-primary)' : key === 'vtoSessionsThisMonth' ? 'var(--color-brand-accent)' : 'var(--color-text)',
                   }}
                 >
                   {row[key]}

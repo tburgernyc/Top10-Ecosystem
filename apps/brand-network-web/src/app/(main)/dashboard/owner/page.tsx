@@ -71,7 +71,7 @@ function BentoMetricCard({
       >
         {value}
       </p>
-      <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>{sub}</p>
+      <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>{sub}</p>
     </div>
   );
 }
@@ -117,7 +117,7 @@ export default async function OwnerDashboardPage() {
           label="Today's Appointments"
           value={apptStats?.total_today?.toString() ?? '—'}
           sub={`${apptStats?.confirmed ?? 0} confirmed · ${apptStats?.in_progress ?? 0} active`}
-          accentColor="var(--color-brand-primary)"
+          accentColor="var(--color-primary)"
         />
         <BentoMetricCard
           label="Active Walk-In Queue"

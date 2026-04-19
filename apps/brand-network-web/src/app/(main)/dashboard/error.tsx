@@ -55,7 +55,7 @@ export default function DashboardError({ error, reset }: Props) {
         <h2 className="heading-display" style={{ fontSize: '1.75rem', marginBottom: '1rem' }}>
           Dashboard Error
         </h2>
-        <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.7, marginBottom: '2rem' }}>
+        <p style={{ color: 'var(--color-text-muted)', lineHeight: 1.7, marginBottom: '2rem' }}>
           A database query encountered an error. Your data is safe. Please retry or contact support if the issue persists.
         </p>
 
@@ -63,7 +63,7 @@ export default function DashboardError({ error, reset }: Props) {
           <pre
             style={{
               background: 'var(--color-bg-sunken)',
-              border: '1px solid var(--color-surface-border)',
+              border: '1px solid var(--color-border)',
               borderRadius: 'var(--radius-md)',
               padding: '1rem',
               fontSize: '0.75rem',
