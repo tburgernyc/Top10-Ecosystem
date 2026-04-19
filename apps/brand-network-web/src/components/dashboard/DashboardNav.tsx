@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import type { AuthUser } from '@/lib/auth';
+import { createClient } from '@/lib/supabase/client';
 
 interface Props {
   user: AuthUser;
@@ -46,7 +47,14 @@ const NAV_ITEMS_BY_ROLE: Record<string, Array<{ label: string; href: string; ico
 
 export default function DashboardNav({ user }: Props) {
   const pathname = usePathname();
+  const router = useRouter();
   const navItems = NAV_ITEMS_BY_ROLE[user.role] ?? [];
+
+  const handleSignOut = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.push('/');
+  };
 
   return (
     <>
@@ -107,13 +115,32 @@ export default function DashboardNav({ user }: Props) {
           })}
         </nav>
 
-        <div className="glass-card" style={{ padding: '1rem', marginTop: 'auto' }}>
-          <p style={{ color: 'var(--color-text)', fontSize: '0.875rem', fontWeight: 600 }}>
-            {user.first_name} {user.last_name}
-          </p>
-          <p style={{ color: 'var(--color-text-tertiary)', fontSize: '0.75rem', marginTop: '0.125rem' }}>
-            {user.email}
-          </p>
+        <div style={{ marginTop: 'auto' }}>
+          <div className="glass-card" style={{ padding: '1rem' }}>
+            <p style={{ color: 'var(--color-text)', fontSize: '0.875rem', fontWeight: 600 }}>
+              {user.first_name} {user.last_name}
+            </p>
+            <p style={{ color: 'var(--color-text-tertiary)', fontSize: '0.75rem', marginTop: '0.125rem' }}>
+              {user.email}
+            </p>
+          </div>
+          <button
+            onClick={handleSignOut}
+            style={{
+              width: '100%',
+              marginTop: '0.5rem',
+              padding: '0.625rem 1rem',
+              borderRadius: 'var(--radius-md)',
+              background: 'transparent',
+              border: '1px solid var(--color-border)',
+              color: 'var(--color-text-muted)',
+              fontSize: '0.8125rem',
+              cursor: 'pointer',
+              textAlign: 'left',
+            }}
+          >
+            ← Sign Out
+          </button>
         </div>
       </aside>
 
@@ -167,6 +194,23 @@ export default function DashboardNav({ user }: Props) {
               </Link>
             );
           })}
+          <button
+            onClick={handleSignOut}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              padding: '0.5rem 1rem',
+              borderRadius: 'var(--radius-pill)',
+              background: 'transparent',
+              border: '1px solid var(--color-border)',
+              color: 'var(--color-text-muted)',
+              fontSize: '0.875rem',
+              cursor: 'pointer',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Sign Out
+          </button>
         </div>
       </div>
     </>

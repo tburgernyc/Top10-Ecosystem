@@ -13,6 +13,7 @@ const FOOTER_LINKS = {
     { label: 'Journal', href: '/journal' },
     { label: 'Contact', href: '/contact' },
     { label: 'Careers', href: '/careers' },
+    { label: 'Staff Portal', href: '/gate' },
   ],
   Legal: [
     { label: 'Privacy Policy', href: '/privacy' },
