@@ -83,8 +83,8 @@ html {
 }
 
 body {
-  background-color: var(--color-bg-noir);
-  color: var(--color-text-primary);
+  background-color: var(--color-bg);
+  color: var(--color-text);
   font-family: var(--font-ui);
   font-size: 1rem;
   line-height: 1.5;
@@ -100,8 +100,8 @@ input, textarea, select {
 /* ── COMPONENT CLASSES ───────────────────────────────────────────────────── */
 
 .glass-card {
-  background: var(--color-surface-glass);
-  border: 1px solid var(--color-surface-border);
+  background: var(--color-bg-glass);
+  border: 1px solid var(--color-border);
   backdrop-filter: blur(var(--blur-md)) saturate(180%);
   -webkit-backdrop-filter: blur(var(--blur-md)) saturate(180%);
   border-radius: var(--radius-lg);
@@ -118,8 +118,8 @@ input, textarea, select {
 }
 
 .bento-card {
-  background: var(--color-surface-glass);
-  border: 1px solid var(--color-surface-border);
+  background: var(--color-bg-glass);
+  border: 1px solid var(--color-border);
   backdrop-filter: blur(var(--blur-md)) saturate(180%);
   -webkit-backdrop-filter: blur(var(--blur-md)) saturate(180%);
   border-radius: var(--radius-xl);
@@ -149,7 +149,7 @@ input, textarea, select {
 }
 
 .mesh-bg {
-  background-color: var(--color-bg-noir);
+  background-color: var(--color-bg);
   background-image:
     radial-gradient(ellipse 80% 60% at 20% 20%, rgba(242, 75, 154, 0.12) 0%, transparent 60%),
     radial-gradient(ellipse 60% 80% at 80% 80%, rgba(123, 97, 255, 0.10) 0%, transparent 60%),
@@ -172,7 +172,7 @@ input, textarea, select {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: var(--color-brand-primary);
+  background: var(--color-primary);
   color: var(--color-text-inverse);
   font-family: var(--font-ui);
   font-size: 1rem;
@@ -190,7 +190,7 @@ input, textarea, select {
 
 .btn-primary:hover {
   transform: scale(1.04);
-  box-shadow: 0 0 32px var(--color-brand-primary-glow);
+  box-shadow: 0 0 32px var(--color-primary-glow);
 }
 
 .btn-primary:active { transform: scale(0.97); }
@@ -209,7 +209,7 @@ input, textarea, select {
   justify-content: center;
   gap: 0.5rem;
   background: transparent;
-  color: var(--color-text-primary);
+  color: var(--color-text);
   font-family: var(--font-ui);
   font-size: 1rem;
   font-weight: 500;
@@ -227,8 +227,8 @@ input, textarea, select {
 
 .btn-ghost:hover {
   background: var(--color-surface-glass-md);
-  border-color: var(--color-brand-primary);
-  color: var(--color-brand-primary);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .btn-gold {
@@ -260,9 +260,9 @@ input, textarea, select {
 
 .input-luxury {
   background: var(--color-bg-sunken);
-  border: 1px solid var(--color-surface-border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  color: var(--color-text-primary);
+  color: var(--color-text);
   font-family: var(--font-ui);
   font-size: 1rem; /* Mandatory 16px floor — iOS Safari zoom prevention */
   padding: 0.875rem 1rem;
@@ -274,8 +274,8 @@ input, textarea, select {
 }
 
 .input-luxury:focus {
-  border-color: var(--color-brand-primary);
-  box-shadow: 0 0 0 3px var(--color-brand-primary-glow);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-glow);
 }
 
 .input-luxury::placeholder {
@@ -291,7 +291,7 @@ input, textarea, select {
   transform: translateX(-50%);
   z-index: 100;
   background: rgba(11, 10, 14, 0.85);
-  border: 1px solid var(--color-surface-border);
+  border: 1px solid var(--color-border);
   backdrop-filter: blur(var(--blur-md)) saturate(200%);
   -webkit-backdrop-filter: blur(var(--blur-md)) saturate(200%);
   border-radius: var(--radius-pill);
@@ -308,7 +308,7 @@ input, textarea, select {
 }
 
 .nav-link {
-  color: var(--color-text-secondary);
+  color: var(--color-text-muted);
   font-family: var(--font-ui);
   font-size: 0.875rem;
   font-weight: 500;
@@ -325,13 +325,13 @@ input, textarea, select {
   left: 0;
   width: 0;
   height: 1px;
-  background: var(--color-brand-primary);
+  background: var(--color-primary);
   transition: width var(--duration-normal) var(--ease-luxury);
 }
 
-.nav-link:hover { color: var(--color-text-primary); }
+.nav-link:hover { color: var(--color-text); }
 .nav-link:hover::after { width: 100%; }
-.nav-link.active { color: var(--color-brand-primary); }
+.nav-link.active { color: var(--color-primary); }
 .nav-link.active::after { width: 100%; }
 
 /* ── PAGE TRANSITIONS ────────────────────────────────────────────────────── */
@@ -369,10 +369,10 @@ input, textarea, select {
 .font-ui      { font-family: var(--font-ui); }
 .font-mono    { font-family: var(--font-mono); }
 
-.text-brand-primary   { color: var(--color-brand-primary); }
+.text-brand-primary   { color: var(--color-primary); }
 .text-brand-secondary { color: var(--color-brand-secondary); }
 .text-brand-accent    { color: var(--color-brand-accent); }
-.text-muted           { color: var(--color-text-secondary); }
+.text-muted           { color: var(--color-text-muted); }
 .text-faint           { color: var(--color-text-tertiary); }
 
 .heading-display {
@@ -380,7 +380,7 @@ input, textarea, select {
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.025em;
-  color: var(--color-text-primary);
+  color: var(--color-text);
 }
 
 .heading-section {
@@ -388,7 +388,7 @@ input, textarea, select {
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: -0.02em;
-  color: var(--color-text-primary);
+  color: var(--color-text);
 }
 
 .label-luxury {
@@ -405,11 +405,11 @@ input, textarea, select {
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--color-surface-border-md); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-brand-primary); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
 
 /* ── SELECTION ───────────────────────────────────────────────────────────── */
 
 ::selection {
-  background: var(--color-brand-primary-glow);
-  color: var(--color-text-primary);
+  background: var(--color-primary-glow);
+  color: var(--color-text);
 }
