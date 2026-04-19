@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 async function getAllDresses() {
   try {
-    return db.select().from(dresses).where(eq(dresses.is_active, true)).orderBy(dresses.designer, dresses.name);
+    return await db.select().from(dresses).where(eq(dresses.is_active, true)).orderBy(dresses.designer, dresses.name);
   } catch {
     return [];
   }

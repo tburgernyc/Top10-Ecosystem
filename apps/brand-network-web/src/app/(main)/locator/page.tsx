@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 async function getAllTenants() {
   try {
-    return db.select().from(tenants).where(eq(tenants.is_active, true)).orderBy(tenants.name);
+    return await db.select().from(tenants).where(eq(tenants.is_active, true)).orderBy(tenants.name);
   } catch {
     return [];
   }
