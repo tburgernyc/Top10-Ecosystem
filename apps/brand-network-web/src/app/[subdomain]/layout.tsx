@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { resolveTenant } from '@/lib/tenant';
 import FloatingPillNav from '@/components/navigation/FloatingPillNav';
 import Footer from '@/components/navigation/Footer';
+import AIStylistBot from '@/components/ai/AIStylistBot';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -54,6 +55,7 @@ export default async function SubdomainLayout({ children, params }: Props) {
         {children}
       </main>
       <Footer />
+      <AIStylistBot tenantId={tenant.id} />
     </>
   );
 }
