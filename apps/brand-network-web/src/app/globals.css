@@ -11,33 +11,35 @@
 /* ── CSS CUSTOM PROPERTIES ───────────────────────────────────────────────── */
 :root {
   /* Backgrounds */
-  --color-bg-noir:          #0B0A0E;
-  --color-bg-elevated:      #161420;
+  --color-bg:               #0B0A0E;
+  --color-bg-elevated:      #16151A;
   --color-bg-sunken:        #070609;
 
   /* Glass Surfaces */
-  --color-surface-glass:    rgba(255, 255, 255, 0.03);
+  --color-bg-glass:         rgba(255, 255, 255, 0.04);
   --color-surface-glass-md: rgba(255, 255, 255, 0.06);
-  --color-surface-border:   rgba(255, 255, 255, 0.08);
+  --color-border:           rgba(255, 255, 255, 0.08);
   --color-surface-border-md:rgba(255, 255, 255, 0.14);
 
   /* Brand */
-  --color-brand-primary:    #F24B9A;
+  --color-primary:          #F24B9A;
+  --color-primary-subtle:   rgba(242, 75, 154, 0.15);
+  --color-primary-glow:     rgba(242, 75, 154, 0.22);
   --color-brand-secondary:  #C9A96E;
   --color-brand-accent:     #7B61FF;
-  --color-brand-primary-glow: rgba(242, 75, 154, 0.25);
   --color-brand-accent-glow: rgba(123, 97, 255, 0.20);
 
   /* Typography */
-  --color-text-primary:     #F8F4F0;
-  --color-text-secondary:   rgba(248, 244, 240, 0.60);
+  --color-text:             #FFFFFF;
+  --color-text-muted:       #A1A1AA;
   --color-text-tertiary:    rgba(248, 244, 240, 0.35);
   --color-text-inverse:     #0B0A0E;
 
   /* Semantic */
-  --color-success:          #32D74B;
+  --color-success:          #34D399;
+  --color-success-glow:     rgba(52, 211, 153, 0.35);
   --color-warning:          #FFD60A;
-  --color-error:            #FF453A;
+  --color-error:            #F87171;
   --color-info:             #0A84FF;
 
   /* Fonts */
