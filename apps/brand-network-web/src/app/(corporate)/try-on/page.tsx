@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import TryOnForm from './TryOnForm';
+import BackButton from '@/components/navigation/BackButton';
 
 export const metadata: Metadata = {
   title: 'Virtual Try-On | Top 10 Prom',
@@ -13,6 +14,10 @@ export default function TryOnPage() {
       style={{ minHeight: '100dvh', paddingTop: '8rem', paddingBottom: '4rem' }}
     >
       <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 2rem' }}>
+        <div style={{ marginBottom: '2rem' }}>
+          <BackButton />
+        </div>
+
         {/* Hero header */}
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <p className="label-luxury" style={{ color: 'var(--color-brand-accent)', marginBottom: '1rem' }}>

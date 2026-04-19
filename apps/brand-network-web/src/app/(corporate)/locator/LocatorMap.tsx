@@ -16,6 +16,7 @@ export default function LocatorMap({ locations }: Props) {
   const mapRef = useRef<HTMLDivElement>(null);
   const [selectedLocation, setSelectedLocation] = useState<Tenant | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const hasMapKey = Boolean(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
 
   const filtered = locations.filter(
     (l) =>
@@ -60,7 +61,7 @@ export default function LocatorMap({ locations }: Props) {
   }, [locations]);
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '380px 1fr', height: 'calc(100dvh - 12rem)' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '380px 1fr', height: 'calc(100dvh - 14rem)', minHeight: '600px' }}>
       {/* List panel */}
       <div
         style={{
@@ -128,7 +129,29 @@ export default function LocatorMap({ locations }: Props) {
       </div>
 
       {/* Map canvas */}
-      <div ref={mapRef} style={{ width: '100%', height: '100%' }} aria-label="Boutique locations map" />
+      {hasMapKey ? (
+        <div ref={mapRef} style={{ width: '100%', height: '100%', minHeight: '600px' }} aria-label="Boutique locations map" />
+      ) : (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '1rem',
+            background: 'var(--color-bg-elevated)',
+            minHeight: '600px',
+          }}
+          aria-label="Map unavailable"
+        >
+          <p style={{ color: 'var(--color-text-tertiary)', fontSize: '0.875rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+            Map preview unavailable
+          </p>
+          <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.8125rem' }}>
+            Configure <code>NEXT_PUBLIC_GOOGLE_MAPS_API_KEY</code> to enable the map.
+          </p>
+        </div>
+      )}
     </div>
   );
 }

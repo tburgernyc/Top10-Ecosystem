@@ -3,6 +3,7 @@ import { db } from '@toptenprom/database';
 import { tenants } from '@toptenprom/database';
 import { eq } from 'drizzle-orm';
 import LocatorMap from './LocatorMap';
+import BackButton from '@/components/navigation/BackButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -29,6 +30,9 @@ export default async function LocatorPage() {
         className="mesh-bg"
         style={{ padding: '4rem 2rem', textAlign: 'center', borderBottom: '1px solid var(--color-surface-border)' }}
       >
+        <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '1.5rem' }}>
+          <BackButton />
+        </div>
         <p className="label-luxury" style={{ marginBottom: '1rem' }}>55 Locations</p>
         <h1 className="heading-display" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}>
           Find Your Boutique
