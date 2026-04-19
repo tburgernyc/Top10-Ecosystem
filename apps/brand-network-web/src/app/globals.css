@@ -15,11 +15,11 @@
   --color-bg-elevated:      #16151A;
   --color-bg-sunken:        #070609;
 
-  /* Glass Surfaces */
+  /* Glass Surfaces / Borders */
   --color-bg-glass:         rgba(255, 255, 255, 0.04);
   --color-surface-glass-md: rgba(255, 255, 255, 0.06);
   --color-border:           rgba(255, 255, 255, 0.08);
-  --color-surface-border-md:rgba(255, 255, 255, 0.14);
+  --color-surface-border-md: rgba(255, 255, 255, 0.14);
 
   /* Brand */
   --color-primary:          #F24B9A;
