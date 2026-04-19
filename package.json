@@ -1,0 +1,25 @@
+{
+  "name": "toptenprom-ecosystem",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Top 10 Prom — 55-location luxury boutique multi-tenant SaaS",
+  "scripts": {
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "dev": "turbo run dev",
+    "db:push": "pnpm --filter @toptenprom/database db:push",
+    "db:migrate": "pnpm --filter @toptenprom/database db:migrate",
+    "db:studio": "pnpm --filter @toptenprom/database db:studio",
+    "db:seed": "pnpm --filter @toptenprom/database db:seed",
+    "db:check": "pnpm --filter @toptenprom/database db:check"
+  },
+  "devDependencies": {
+    "turbo": "latest"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}

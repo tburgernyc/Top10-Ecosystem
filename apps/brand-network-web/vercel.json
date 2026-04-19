@@ -1,0 +1,73 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "buildCommand": "pnpm build",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "regions": ["iad1"],
+  "functions": {
+    "src/app/api/chat/route.ts": {
+      "maxDuration": 30,
+      "memory": 2048
+    },
+    "src/app/api/vto/initiate/route.ts": {
+      "maxDuration": 30,
+      "memory": 2048
+    },
+    "src/app/api/vto/webhook/route.ts": {
+      "maxDuration": 30,
+      "memory": 1024
+    },
+    "src/app/api/sync/route.ts": {
+      "maxDuration": 30,
+      "memory": 1024
+    },
+    "src/app/api/bookings/create/route.ts": {
+      "maxDuration": 30,
+      "memory": 512
+    },
+    "src/app/api/og/vote/route.tsx": {
+      "maxDuration": 5,
+      "memory": 512
+    },
+    "src/app/api/analytics/export/route.ts": {
+      "maxDuration": 30,
+      "memory": 1024
+    }
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(self)" }
+      ]
+    },
+    {
+      "source": "/_next/static/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/fonts/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/videos/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400" }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
+    }
+  ]
+}

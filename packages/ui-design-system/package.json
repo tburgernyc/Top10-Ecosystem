@@ -1,0 +1,12 @@
+{
+  "name": "@toptenprom/ui-design-system",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "exports": {
+    ".": "./src/theme.ts"
+  },
+  "devDependencies": {
+    "@toptenprom/typescript-config": "workspace:*"
+  }
+}
