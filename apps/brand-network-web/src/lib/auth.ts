@@ -4,6 +4,36 @@ import { db } from '@toptenprom/database';
 import { boutique_staff, users } from '@toptenprom/database';
 import { eq } from 'drizzle-orm';
 
+export type CustomerSession = {
+  id: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+};
+
+/** Auth guard for customer-only pages — no staff role required. */
+export async function requireCustomerSession(): Promise<CustomerSession> {
+  const supabase = await createClient();
+  let userId: string | null = null;
+
+  try {
+    const { data: { user }, error } = await supabase.auth.getUser();
+    if (!error && user) userId = user.id;
+  } catch { /* fall through */ }
+
+  if (!userId) redirect('/login');
+
+  let session: CustomerSession | null = null;
+  try {
+    const [u] = await db.select({ id: users.id, email: users.email, first_name: users.first_name, last_name: users.last_name })
+      .from(users).where(eq(users.id, userId)).limit(1);
+    if (u) session = u;
+  } catch { /* fall through */ }
+
+  if (!session) redirect('/login');
+  return session;
+}
+
 export type AuthUser = {
   id: string;
   email: string;

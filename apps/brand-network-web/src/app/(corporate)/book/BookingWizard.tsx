@@ -1,7 +1,9 @@
 'use client';
 
-import { useState, useTransition, Suspense } from 'react';
+import { useState, useTransition, Suspense, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+
+type Boutique = { id: string; name: string; city: string; state: string };
 
 type Step = 'location' | 'service' | 'time' | 'confirm';
 
@@ -16,14 +18,35 @@ function BookingWizardInner() {
   const [step, setStep] = useState<Step>('location');
   const [locationId, setLocationId] = useState('');
   const [serviceId, setServiceId] = useState('');
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState('');
   const [isPending, startTransition] = useTransition();
   const [bookingError, setBookingError] = useState<string | null>(null);
   const [confirmationCode, setConfirmationCode] = useState<string | null>(null);
+  const [boutiques, setBoutiques] = useState<Boutique[]>([]);
+  const [availableSlots, setAvailableSlots] = useState<string[] | null>(null);
+  const [slotsLoading, setSlotsLoading] = useState(false);
 
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  useEffect(() => {
+    fetch('/api/boutiques')
+      .then((r) => r.json())
+      .then((d: { boutiques: Boutique[] }) => setBoutiques(d.boutiques ?? []))
+      .catch(() => {/* non-fatal */});
+  }, []);
+
+  useEffect(() => {
+    if (!selectedDate || !locationId || step !== 'time') return;
+    setSlotsLoading(true);
+    setAvailableSlots(null);
+    fetch(`/api/bookings/availability?tenantId=${locationId}&date=${selectedDate}`)
+      .then((r) => r.json())
+      .then((d: { available: string[] }) => setAvailableSlots(d.available ?? []))
+      .catch(() => setAvailableSlots(['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM']))
+      .finally(() => setSlotsLoading(false));
+  }, [selectedDate, locationId, step]);
 
   // Pre-populate location from /locator query param
   const preselectedLocation = searchParams.get('location') ?? '';
@@ -39,6 +62,7 @@ function BookingWizardInner() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ locationId, serviceId, date: selectedDate, time: selectedTime }),
+          // selectedDate is YYYY-MM-DD string; bookings/create parses it
         });
 
         if (!response.ok) {
@@ -98,15 +122,30 @@ function BookingWizardInner() {
       {step === 'location' && (
         <div>
           <h2 className="heading-section" style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>Choose Location</h2>
-          <input
-            id="booking-location"
-            type="text"
-            className="input-luxury"
-            placeholder="Enter location ID or browse /locator"
-            value={locationId || preselectedLocation}
-            onChange={(e) => setLocationId(e.target.value)}
-            style={{ fontSize: '1rem' /* iOS zoom prevention */ }}
-          />
+          {boutiques.length > 0 ? (
+            <select
+              id="booking-location"
+              className="input-luxury"
+              value={locationId || preselectedLocation}
+              onChange={(e) => setLocationId(e.target.value)}
+              style={{ fontSize: '1rem', width: '100%' }}
+            >
+              <option value="">Select a boutique…</option>
+              {boutiques.map((b) => (
+                <option key={b.id} value={b.id}>{b.name} — {b.city}, {b.state}</option>
+              ))}
+            </select>
+          ) : (
+            <input
+              id="booking-location"
+              type="text"
+              className="input-luxury"
+              placeholder="Loading boutiques…"
+              value={locationId || preselectedLocation}
+              onChange={(e) => setLocationId(e.target.value)}
+              style={{ fontSize: '1rem' }}
+            />
+          )}
           <button
             type="button"
             className="btn-primary"
@@ -161,30 +200,40 @@ function BookingWizardInner() {
             id="booking-date"
             type="date"
             className="input-luxury"
-            onChange={(e) => setSelectedDate(new Date(e.target.value))}
-            style={{ marginBottom: '1rem', fontSize: '1rem' /* iOS zoom prevention */ }}
+            value={selectedDate}
+            onChange={(e) => { setSelectedDate(e.target.value); setSelectedTime(''); }}
+            min={new Date().toISOString().split('T')[0]}
+            style={{ marginBottom: '1rem', fontSize: '1rem' }}
           />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.5rem' }}>
-            {['10:00 AM', '11:00 AM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'].map((time) => (
-              <button
-                key={time}
-                type="button"
-                onClick={() => setSelectedTime(time)}
-                style={{
-                  padding: '0.75rem 0.5rem',
-                  borderRadius: 'var(--radius-md)',
-                  border: `1px solid ${selectedTime === time ? 'var(--color-primary)' : 'var(--color-border)'}`,
-                  background: selectedTime === time ? 'var(--color-surface-glass-md)' : 'transparent',
-                  color: selectedTime === time ? 'var(--color-primary)' : 'var(--color-text-muted)',
-                  cursor: 'pointer',
-                  fontSize: '0.875rem',
-                  transition: 'all 0.2s ease',
-                }}
-              >
-                {time}
-              </button>
-            ))}
-          </div>
+          {slotsLoading && (
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem', marginBottom: '1rem' }}>Checking availability…</p>
+          )}
+          {!slotsLoading && availableSlots !== null && availableSlots.length === 0 && (
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem', marginBottom: '1rem' }}>No slots available for this date — try another day.</p>
+          )}
+          {!slotsLoading && availableSlots && availableSlots.length > 0 && (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.5rem' }}>
+              {availableSlots.map((time) => (
+                <button
+                  key={time}
+                  type="button"
+                  onClick={() => setSelectedTime(time)}
+                  style={{
+                    padding: '0.75rem 0.5rem',
+                    borderRadius: 'var(--radius-md)',
+                    border: `1px solid ${selectedTime === time ? 'var(--color-primary)' : 'var(--color-border)'}`,
+                    background: selectedTime === time ? 'var(--color-surface-glass-md)' : 'transparent',
+                    color: selectedTime === time ? 'var(--color-primary)' : 'var(--color-text-muted)',
+                    cursor: 'pointer',
+                    fontSize: '0.875rem',
+                    transition: 'all 0.2s ease',
+                  }}
+                >
+                  {time}
+                </button>
+              ))}
+            </div>
+          )}
           <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
             <button type="button" className="btn-ghost" onClick={() => setStep('service')} style={{ flex: 1 }}>Back</button>
             <button
@@ -208,7 +257,7 @@ function BookingWizardInner() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {([
                 ['Service', SERVICES.find((s) => s.id === serviceId)?.label ?? ''],
-                ['Date', selectedDate?.toLocaleDateString() ?? ''],
+                ['Date', selectedDate ? new Date(selectedDate + 'T12:00:00').toLocaleDateString() : ''],
                 ['Time', selectedTime],
               ] as [string, string][]).map(([label, value]) => (
                 <div key={label} style={{ display: 'flex', justifyContent: 'space-between' }}>

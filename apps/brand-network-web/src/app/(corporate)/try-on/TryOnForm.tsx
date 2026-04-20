@@ -1,10 +1,19 @@
 'use client';
 
-import { useState, useCallback, useTransition } from 'react';
+import { useState, useCallback, useTransition, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { createClient } from '@/lib/supabase/client';
 import Image from 'next/image';
 import Link from 'next/link';
+
+type DressOption = {
+  id: string;
+  name: string;
+  designer: string;
+  retail_price: string;
+  available_colors: Array<{ name: string; hex: string; swatch_image_url: string }>;
+  image_urls: { hero: string; gallery: string[]; on_model: string[] };
+};
 
 type VTOStatus = 'idle' | 'uploading' | 'processing' | 'completed' | 'failed';
 
@@ -14,8 +23,24 @@ export default function TryOnForm() {
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
+  const [dressOptions, setDressOptions] = useState<DressOption[]>([]);
+  const [selectedDressId, setSelectedDressId] = useState('');
+  const [selectedColor, setSelectedColor] = useState('');
 
   const supabase = createClient();
+
+  useEffect(() => {
+    fetch('/api/dresses?limit=20')
+      .then((r) => r.json())
+      .then((data: { dresses: DressOption[] }) => {
+        setDressOptions(data.dresses ?? []);
+        if (data.dresses?.length) {
+          setSelectedDressId(data.dresses[0]!.id);
+          setSelectedColor(data.dresses[0]!.available_colors?.[0]?.name ?? '');
+        }
+      })
+      .catch(() => {/* non-fatal */});
+  }, []);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
@@ -50,8 +75,8 @@ export default function TryOnForm() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            dress_id: 'demo-dress-id',
-            color_name: 'Blush Pink',
+            dress_id: selectedDressId || 'demo-dress-id',
+            color_name: selectedColor || 'Blush Pink',
             image_base64: base64,
           }),
         });
@@ -103,8 +128,60 @@ export default function TryOnForm() {
     });
   };
 
+  const selectedDress = dressOptions.find((d) => d.id === selectedDressId);
+
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      {/* Dress selector */}
+      {dressOptions.length > 0 && (
+        <div>
+          <p className="label-luxury" style={{ marginBottom: '1rem' }}>Choose a Dress</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: '0.75rem', maxHeight: '280px', overflowY: 'auto', paddingRight: '0.25rem' }}>
+            {dressOptions.map((d) => (
+              <button
+                key={d.id}
+                type="button"
+                onClick={() => { setSelectedDressId(d.id); setSelectedColor(d.available_colors?.[0]?.name ?? ''); }}
+                style={{
+                  borderRadius: 'var(--radius-md)',
+                  border: `2px solid ${selectedDressId === d.id ? 'var(--color-primary)' : 'var(--color-border)'}`,
+                  background: 'transparent',
+                  cursor: 'pointer',
+                  padding: 0,
+                  overflow: 'hidden',
+                  transition: 'border-color 0.2s ease',
+                }}
+              >
+                {d.image_urls?.hero && (
+                  <Image src={d.image_urls.hero} alt={d.name} width={120} height={160} style={{ width: '100%', height: '120px', objectFit: 'cover', display: 'block' }} />
+                )}
+                <p style={{ padding: '0.4rem', fontSize: '0.7rem', color: 'var(--color-text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{d.name}</p>
+              </button>
+            ))}
+          </div>
+          {selectedDress && selectedDress.available_colors.length > 1 && (
+            <div style={{ marginTop: '0.75rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>Color:</span>
+              {selectedDress.available_colors.map((c) => (
+                <button
+                  key={c.name}
+                  type="button"
+                  title={c.name}
+                  onClick={() => setSelectedColor(c.name)}
+                  style={{
+                    width: '24px', height: '24px', borderRadius: '50%', background: c.hex,
+                    border: `2px solid ${selectedColor === c.name ? 'var(--color-primary)' : 'transparent'}`,
+                    cursor: 'pointer',
+                  }}
+                />
+              ))}
+              <span style={{ fontSize: '0.75rem', color: 'var(--color-text-tertiary)' }}>{selectedColor}</span>
+            </div>
+          )}
+        </div>
+      )}
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
       {/* Upload zone */}
       <div>
         <p className="label-luxury" style={{ marginBottom: '1rem' }}>Your Photo</p>
@@ -249,6 +326,7 @@ export default function TryOnForm() {
       <style>{`
         @keyframes tryon-spin { to { transform: rotate(360deg); } }
       `}</style>
+    </div>
     </div>
   );
 }
