@@ -156,15 +156,17 @@ async function seed() {
   });
 
   // Set store codes for dev — real codes set via admin UI
-  await db.update(tenants).set({
+  const flagshipResult = await db.update(tenants).set({
     store_code: 'STORE001',
     mobile_sync_secret: process.env['MOBILE_SYNC_API_SECRET'] ?? 'dev-secret-change-in-production',
-  }).where(eq(tenants.subdomain, 'flagship'));
+  }).where(eq(tenants.subdomain, 'flagship')).returning({ id: tenants.id });
+  if (flagshipResult.length === 0) throw new Error('[Seed] flagship tenant not found — store_code not set');
 
-  await db.update(tenants).set({
+  const sohoResult = await db.update(tenants).set({
     store_code: 'STORE002',
     mobile_sync_secret: process.env['MOBILE_SYNC_API_SECRET'] ?? 'dev-secret-change-in-production',
-  }).where(eq(tenants.subdomain, 'soho'));
+  }).where(eq(tenants.subdomain, 'soho')).returning({ id: tenants.id });
+  if (sohoResult.length === 0) throw new Error('[Seed] soho tenant not found — store_code not set');
 
   // ─── USERS ───────────────────────────────────────────────────────────────
   console.log('[Seed] Inserting users…');
