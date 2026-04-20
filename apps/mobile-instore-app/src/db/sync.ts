@@ -1,4 +1,4 @@
-import { synchronize } from '@nozbe/watermelondb/sync';
+import { synchronize, type SyncDatabaseChangeSet } from '@nozbe/watermelondb/sync';
 import { MMKV } from 'react-native-mmkv';
 import { database } from './database';
 import { apiFetch } from '../lib/api';
@@ -15,13 +15,8 @@ function setLastPulledAt(timestamp: number): void {
   storage.set(LAST_PULLED_AT_KEY, timestamp);
 }
 
-interface SyncChanges {
-  walk_ins?: { created: unknown[]; updated: unknown[]; deleted: string[] };
-  appointments?: { created: unknown[]; updated: unknown[]; deleted: string[] };
-}
-
 interface PullResponse {
-  changes: SyncChanges;
+  changes: SyncDatabaseChangeSet;
   timestamp: number;
 }
 

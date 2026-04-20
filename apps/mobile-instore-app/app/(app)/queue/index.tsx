@@ -4,7 +4,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { router } from 'expo-router';
-import { withObservables } from '@nozbe/with-observables';
+import { default as withObservables } from '@nozbe/with-observables';
 import NetInfo from '@react-native-community/netinfo';
 import { database } from '@/db/database';
 import WalkIn from '@/db/models/WalkIn';
@@ -72,7 +72,7 @@ function QueueScreen({ walkIns, appointments }: Props) {
     return () => unsub();
   }, []);
 
-  const sections = [
+  const sections: { title: string; data: (WalkIn | Appointment)[] }[] = [
     { title: 'Walk-Ins', data: walkIns },
     { title: "Today's Appointments", data: appointments },
   ];

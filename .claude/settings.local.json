@@ -37,7 +37,12 @@
       "Bash(git branch *)",
       "Bash(git remote *)",
       "Bash(git rm *)",
-      "Bash(rm -rf /mnt/c/Users/tburg/Top10PromWebsite/top-10-prom-ecosystem/apps/brand-network-web/.git)"
+      "Bash(rm -rf /mnt/c/Users/tburg/Top10PromWebsite/top-10-prom-ecosystem/apps/brand-network-web/.git)",
+      "Bash(git checkout *)",
+      "Bash(git pull *)",
+      "Bash(git merge *)",
+      "Bash(node apps/brand-network-web/node_modules/.bin/tsc --noEmit -p apps/brand-network-web/tsconfig.json)",
+      "Bash(echo \"exit: $?\")"
     ]
   }
 }
