@@ -97,6 +97,8 @@ export const tenants = pgTable(
     >(),
     is_active: boolean('is_active').notNull().default(true),
     max_daily_appointments: integer('max_daily_appointments').notNull().default(30),
+    store_code: varchar('store_code', { length: 50 }),
+    mobile_sync_secret: varchar('mobile_sync_secret', { length: 255 }),
     ...timestamps,
   },
   (table) => ({
@@ -258,7 +260,6 @@ export const appointments = pgTable(
       .notNull()
       .references(() => tenants.id), // MANDATORY
     customer_id: uuid('customer_id')
-      .notNull()
       .references(() => customers.id),
     stylist_id: uuid('stylist_id').references(() => boutique_staff.id, {
       onDelete: 'set null',

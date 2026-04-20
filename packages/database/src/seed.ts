@@ -155,6 +155,17 @@ async function seed() {
     set: { name: sql`excluded.name`, updated_at: new Date() },
   });
 
+  // Set store codes for dev — real codes set via admin UI
+  await db.update(tenants).set({
+    store_code: 'STORE001',
+    mobile_sync_secret: process.env['MOBILE_SYNC_API_SECRET'] ?? 'dev-secret-change-in-production',
+  }).where(eq(tenants.subdomain, 'flagship'));
+
+  await db.update(tenants).set({
+    store_code: 'STORE002',
+    mobile_sync_secret: process.env['MOBILE_SYNC_API_SECRET'] ?? 'dev-secret-change-in-production',
+  }).where(eq(tenants.subdomain, 'soho'));
+
   // ─── USERS ───────────────────────────────────────────────────────────────
   console.log('[Seed] Inserting users…');
   await db.insert(users).values([
