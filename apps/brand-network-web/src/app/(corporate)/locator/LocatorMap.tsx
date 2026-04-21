@@ -12,10 +12,20 @@ interface Props {
   locations: Tenant[];
 }
 
+function haversineKm(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
 export default function LocatorMap({ locations }: Props) {
   const mapRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<google.maps.Map | null>(null);
   const [selectedLocation, setSelectedLocation] = useState<Tenant | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [nearestId, setNearestId] = useState<string | null>(null);
   const hasMapKey = Boolean(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
 
   const filtered = locations.filter(
@@ -24,6 +34,28 @@ export default function LocatorMap({ locations }: Props) {
       l.city.toLowerCase().includes(searchQuery.toLowerCase()) ||
       l.state.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  useEffect(() => {
+    if (!navigator.geolocation) return;
+    navigator.geolocation.getCurrentPosition(({ coords }) => {
+      const { latitude, longitude } = coords;
+      let nearest: Tenant | null = null;
+      let minDist = Infinity;
+      for (const loc of locations) {
+        if (!loc.location_data) continue;
+        const d = haversineKm(latitude, longitude, loc.location_data.lat, loc.location_data.lng);
+        if (d < minDist) { minDist = d; nearest = loc; }
+      }
+      if (nearest) {
+        setNearestId(nearest.id);
+        setSelectedLocation(nearest);
+        if (mapInstanceRef.current && nearest.location_data) {
+          mapInstanceRef.current.panTo({ lat: nearest.location_data.lat, lng: nearest.location_data.lng });
+          mapInstanceRef.current.setZoom(10);
+        }
+      }
+    }, () => {/* permission denied — silent */});
+  }, [locations]);
 
   useEffect(() => {
     const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
@@ -43,6 +75,8 @@ export default function LocatorMap({ locations }: Props) {
         zoomControl: true,
         backgroundColor: '#0B0A0E',
       });
+
+      mapInstanceRef.current = map;
 
       locations.forEach((location) => {
         if (!location.location_data) return;
@@ -107,9 +141,14 @@ export default function LocatorMap({ locations }: Props) {
                   marginBottom: '0.5rem',
                 }}
               >
-                <p style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '0.25rem' }}>
-                  {location.name}
-                </p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
+                  <p style={{ fontWeight: 600, color: 'var(--color-text)' }}>{location.name}</p>
+                  {nearestId === location.id && (
+                    <span style={{ fontSize: '0.65rem', background: 'var(--color-brand-accent)', color: '#000', padding: '0.15rem 0.5rem', borderRadius: 'var(--radius-pill)', fontWeight: 700, letterSpacing: '0.04em' }}>
+                      NEAREST
+                    </span>
+                  )}
+                </div>
                 <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>
                   {location.city}, {location.state}
                 </p>

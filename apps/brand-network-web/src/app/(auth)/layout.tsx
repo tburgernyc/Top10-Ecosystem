@@ -1,16 +1,14 @@
 import FloatingPillNav from '@/components/navigation/FloatingPillNav';
 import Footer from '@/components/navigation/Footer';
-import AIStylistBot from '@/components/ai/AIStylistBot';
 import BlurredVideoBackground from '@/components/ui/BlurredVideoBackground';
 
-export default function CorporateLayout({ children }: { children: React.ReactNode }) {
+export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <BlurredVideoBackground />
       <FloatingPillNav />
       <main>{children}</main>
       <Footer />
-      <AIStylistBot />
     </>
   );
 }

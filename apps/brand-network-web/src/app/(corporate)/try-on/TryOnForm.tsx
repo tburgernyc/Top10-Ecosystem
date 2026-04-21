@@ -27,7 +27,13 @@ export default function TryOnForm() {
   const [selectedDressId, setSelectedDressId] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
 
+  const [isAuthed, setIsAuthed] = useState<boolean | null>(null);
+
   const supabase = createClient();
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => setIsAuthed(!!data.user));
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     fetch('/api/dresses?limit=20')
@@ -129,6 +135,22 @@ export default function TryOnForm() {
   };
 
   const selectedDress = dressOptions.find((d) => d.id === selectedDressId);
+
+  if (isAuthed === false) {
+    return (
+      <div className="glass-card" style={{ padding: '3rem', textAlign: 'center' }}>
+        <p style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>✨</p>
+        <h2 className="heading-section" style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Sign In to Try On Dresses</h2>
+        <p style={{ color: 'var(--color-text-muted)', marginBottom: '2rem' }}>
+          Create a free account or sign in to use AI-powered Virtual Try-On.
+        </p>
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+          <Link href="/login" className="btn-ghost">Sign In</Link>
+          <Link href="/register" className="btn-primary">Create Account</Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>

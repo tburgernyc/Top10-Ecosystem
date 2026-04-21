@@ -5,7 +5,16 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 type Boutique = { id: string; name: string; city: string; state: string };
 
-type Step = 'location' | 'service' | 'time' | 'confirm';
+type Step = 'location' | 'service' | 'customer' | 'time' | 'confirm';
+
+type CustomerInfo = {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  eventType: string;
+  eventDate: string;
+};
 
 const SERVICES = [
   { id: 'prom-styling', label: 'Prom Styling Session', duration: 90, description: 'Full 90-minute personal styling with our expert team.' },
@@ -26,6 +35,9 @@ function BookingWizardInner() {
   const [boutiques, setBoutiques] = useState<Boutique[]>([]);
   const [availableSlots, setAvailableSlots] = useState<string[] | null>(null);
   const [slotsLoading, setSlotsLoading] = useState(false);
+  const [customer, setCustomer] = useState<CustomerInfo>({
+    firstName: '', lastName: '', phone: '', email: '', eventType: '', eventDate: '',
+  });
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -52,7 +64,7 @@ function BookingWizardInner() {
   // Pre-populate location from /locator query param
   const preselectedLocation = searchParams.get('location') ?? '';
 
-  const steps: Step[] = ['location', 'service', 'time', 'confirm'];
+  const steps: Step[] = ['location', 'service', 'customer', 'time', 'confirm'];
   const currentStepIndex = steps.indexOf(step);
 
   const handleConfirm = () => {
@@ -62,7 +74,7 @@ function BookingWizardInner() {
         const response = await fetch('/api/bookings/create', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ locationId, serviceId, date: selectedDate, time: selectedTime }),
+          body: JSON.stringify({ locationId, serviceId, date: selectedDate, time: selectedTime, customer }),
           // selectedDate is YYYY-MM-DD string; bookings/create parses it
         });
 
@@ -188,7 +200,69 @@ function BookingWizardInner() {
           </div>
           <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
             <button type="button" className="btn-ghost" onClick={() => setStep('location')} style={{ flex: 1 }}>Back</button>
-            <button type="button" className="btn-primary" disabled={!serviceId} onClick={() => setStep('time')} style={{ flex: 2 }}>Continue</button>
+            <button type="button" className="btn-primary" disabled={!serviceId} onClick={() => setStep('customer')} style={{ flex: 2 }}>Continue</button>
+          </div>
+        </div>
+      )}
+
+      {/* Step: Customer Info */}
+      {step === 'customer' && (
+        <div>
+          <h2 className="heading-section" style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>Your Information</h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                <label style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>First Name *</label>
+                <input className="input-luxury" style={{ fontSize: '1rem' }} value={customer.firstName}
+                  onChange={(e) => setCustomer((c) => ({ ...c, firstName: e.target.value }))} />
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                <label style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>Last Name *</label>
+                <input className="input-luxury" style={{ fontSize: '1rem' }} value={customer.lastName}
+                  onChange={(e) => setCustomer((c) => ({ ...c, lastName: e.target.value }))} />
+              </div>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+              <label style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>Email *</label>
+              <input type="email" className="input-luxury" style={{ fontSize: '1rem' }} value={customer.email}
+                onChange={(e) => setCustomer((c) => ({ ...c, email: e.target.value }))} />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+              <label style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>Phone Number *</label>
+              <input type="tel" className="input-luxury" style={{ fontSize: '1rem' }} value={customer.phone}
+                onChange={(e) => setCustomer((c) => ({ ...c, phone: e.target.value }))} />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+              <label style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>Event Type *</label>
+              <select className="input-luxury" style={{ fontSize: '1rem' }} value={customer.eventType}
+                onChange={(e) => setCustomer((c) => ({ ...c, eventType: e.target.value }))}>
+                <option value="">Select event…</option>
+                <option value="Prom">Prom</option>
+                <option value="Wedding">Wedding</option>
+                <option value="Homecoming">Homecoming</option>
+                <option value="Quinceañera">Quinceañera</option>
+                <option value="Pageant">Pageant</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+              <label style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>Event Date</label>
+              <input type="date" className="input-luxury" style={{ fontSize: '1rem' }} value={customer.eventDate}
+                min={new Date().toISOString().split('T')[0]}
+                onChange={(e) => setCustomer((c) => ({ ...c, eventDate: e.target.value }))} />
+            </div>
+          </div>
+          <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
+            <button type="button" className="btn-ghost" onClick={() => setStep('service')} style={{ flex: 1 }}>Back</button>
+            <button
+              type="button"
+              className="btn-primary"
+              style={{ flex: 2 }}
+              disabled={!customer.firstName || !customer.lastName || !customer.email || !customer.phone || !customer.eventType}
+              onClick={() => setStep('time')}
+            >
+              Continue
+            </button>
           </div>
         </div>
       )}
@@ -236,7 +310,7 @@ function BookingWizardInner() {
             </div>
           )}
           <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
-            <button type="button" className="btn-ghost" onClick={() => setStep('service')} style={{ flex: 1 }}>Back</button>
+            <button type="button" className="btn-ghost" onClick={() => setStep('customer')} style={{ flex: 1 }}>Back</button>
             <button
               type="button"
               className="btn-primary"
@@ -257,6 +331,9 @@ function BookingWizardInner() {
           <div className="glass-card" style={{ padding: '1.5rem', marginBottom: '1.5rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {([
+                ['Name', `${customer.firstName} ${customer.lastName}`],
+                ['Email', customer.email],
+                ['Event', `${customer.eventType}${customer.eventDate ? ` · ${new Date(customer.eventDate + 'T12:00:00').toLocaleDateString()}` : ''}`],
                 ['Service', SERVICES.find((s) => s.id === serviceId)?.label ?? ''],
                 ['Date', selectedDate ? new Date(selectedDate + 'T12:00:00').toLocaleDateString() : ''],
                 ['Time', selectedTime],
