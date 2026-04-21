@@ -22,7 +22,7 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://staging.toptenprom.com"
+        "EXPO_PUBLIC_API_URL": "https://staging.toptenprom.store"
       }
     },
     "production": {
@@ -36,7 +36,7 @@
         "autoIncrement": "versionCode"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://toptenprom.com"
+        "EXPO_PUBLIC_API_URL": "https://toptenprom.store"
       }
     }
   },
