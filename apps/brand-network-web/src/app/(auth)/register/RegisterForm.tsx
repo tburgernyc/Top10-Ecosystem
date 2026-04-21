@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useTransition } from 'react';
+import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 
@@ -90,7 +91,7 @@ export default function RegisterForm() {
 
       <p style={{ textAlign: 'center', color: 'var(--color-text-tertiary)', fontSize: '0.875rem' }}>
         Already have an account?{' '}
-        <a href="/login" style={{ color: 'var(--color-primary)', textDecoration: 'none' }}>Sign in</a>
+        <Link href="/login" style={{ color: 'var(--color-primary)', textDecoration: 'none' }}>Sign in</Link>
       </p>
     </form>
   );

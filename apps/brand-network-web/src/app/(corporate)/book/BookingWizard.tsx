@@ -39,6 +39,7 @@ function BookingWizardInner() {
 
   useEffect(() => {
     if (!selectedDate || !locationId || step !== 'time') return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSlotsLoading(true);
     setAvailableSlots(null);
     fetch(`/api/bookings/availability?tenantId=${locationId}&date=${selectedDate}`)

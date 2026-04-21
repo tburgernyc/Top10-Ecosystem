@@ -14,13 +14,8 @@ import {
   dress_reservations,
 } from './schema';
 import { sql, eq } from 'drizzle-orm';
-import crypto from 'crypto';
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
-
-function uuid(): string {
-  return crypto.randomUUID();
-}
 
 function generateConfirmationCode(): string {
   return `T10-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;

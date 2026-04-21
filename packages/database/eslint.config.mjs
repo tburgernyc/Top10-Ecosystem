@@ -16,6 +16,10 @@ export default tseslint.config(
     },
   },
   {
+    files: ['src/seed*.ts', 'src/check-schema.ts', 'src/migrate-schema.ts'],
+    rules: { 'no-console': 'off' },
+  },
+  {
     // Ignore generated and config files
     ignores: ['dist/**', 'drizzle/**', '*.config.*'],
   }

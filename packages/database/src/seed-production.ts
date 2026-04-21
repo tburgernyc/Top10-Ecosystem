@@ -341,7 +341,6 @@ async function run() {
   // ── STEP 3: Seed dresses with real images ────────────────────────────────
   console.log('\n👗 [Step 3] Seeding dress catalog with real images…');
 
-  const allDressRows: Array<Parameters<typeof db.insert>[0] extends unknown ? never : never> = [];
   const dressRecords: Array<{ id: string; brand: string }> = [];
 
   for (const brand of brands) {
