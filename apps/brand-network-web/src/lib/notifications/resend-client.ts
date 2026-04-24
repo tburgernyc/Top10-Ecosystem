@@ -1,9 +1,12 @@
 import { Resend } from 'resend';
 
-if (!process.env.RESEND_API_KEY) {
-  throw new Error('RESEND_API_KEY is required. Check .env');
+let cached: Resend | null = null;
+
+export function getResend(): Resend | null {
+  if (cached) return cached;
+  if (!process.env.RESEND_API_KEY) return null;
+  cached = new Resend(process.env.RESEND_API_KEY);
+  return cached;
 }
 
-export const resend = new Resend(process.env.RESEND_API_KEY);
-
-export const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? 'noreply@toptenprom.com';
+export const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? 'noreply@toptenprom.store';

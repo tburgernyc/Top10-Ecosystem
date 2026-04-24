@@ -3,13 +3,17 @@ import { createClient } from '@supabase/supabase-js';
 import { db, vto_sessions } from '@toptenprom/database';
 import { eq } from 'drizzle-orm';
 
-// Service role client for server-side Supabase Realtime broadcast
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
 export async function POST(request: NextRequest) {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!supabaseUrl || !serviceRoleKey) {
+    return NextResponse.json(
+      { error: 'Virtual Try-On webhook is not configured on this deployment.' },
+      { status: 503 },
+    );
+  }
+  const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
+
   const sessionId = request.nextUrl.searchParams.get('session_id');
   const channelId = request.nextUrl.searchParams.get('channel_id');
 

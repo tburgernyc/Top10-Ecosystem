@@ -1,5 +1,5 @@
-import { resend, FROM_EMAIL } from './resend-client';
-import { twilioClient, TWILIO_FROM } from './twilio-client';
+import { getResend, FROM_EMAIL } from './resend-client';
+import { getTwilio, TWILIO_FROM } from './twilio-client';
 import { db } from '@toptenprom/database';
 import { guardian_notifications } from '@toptenprom/database';
 
@@ -31,7 +31,11 @@ export async function sendGuardianNotification(
 
   // ─── EMAIL ────────────────────────────────────────────────────────────────
   if (payload.emailPayload) {
-    try {
+    const resend = getResend();
+    if (!resend) {
+      errors.push('Email delivery skipped: RESEND_API_KEY not configured.');
+      await logNotification(payload, 'email', 'failed', undefined, 'resend-not-configured');
+    } else try {
       const { data, error } = await resend.emails.send({
         from: FROM_EMAIL,
         to: [payload.emailPayload.to],
@@ -56,10 +60,14 @@ export async function sendGuardianNotification(
 
   // ─── SMS ─────────────────────────────────────────────────────────────────
   if (payload.smsPayload) {
-    try {
+    const twilioClient = getTwilio();
+    if (!twilioClient || !TWILIO_FROM) {
+      errors.push('SMS delivery skipped: Twilio not configured.');
+      await logNotification(payload, 'sms', 'failed', undefined, 'twilio-not-configured');
+    } else try {
       const message = await twilioClient.messages.create({
         body: payload.smsPayload.body,
-        from: TWILIO_FROM!,
+        from: TWILIO_FROM,
         to: payload.smsPayload.to,
       });
 

@@ -3,9 +3,18 @@ import { fal } from '@fal-ai/client';
 import { createClient as createSupabaseClient } from '@/lib/supabase/server';
 import { db, vto_sessions } from '@toptenprom/database';
 
-fal.config({ credentials: process.env.FAL_KEY! });
+if (process.env.FAL_KEY) {
+  fal.config({ credentials: process.env.FAL_KEY });
+}
 
 export async function POST(request: NextRequest) {
+  if (!process.env.FAL_KEY) {
+    return NextResponse.json(
+      { error: 'Virtual Try-On is not configured. Please contact support.' },
+      { status: 503 },
+    );
+  }
+
   const supabase = await createSupabaseClient();
   const { data: { user } } = await supabase.auth.getUser();
 

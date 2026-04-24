@@ -1,16 +1,12 @@
-import twilio from 'twilio';
+import twilio, { Twilio } from 'twilio';
 
-if (!process.env.TWILIO_ACCOUNT_SID || !process.env.TWILIO_AUTH_TOKEN) {
-  throw new Error('TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN are required. Check .env');
+let cached: Twilio | null = null;
+
+export function getTwilio(): Twilio | null {
+  if (cached) return cached;
+  if (!process.env.TWILIO_ACCOUNT_SID || !process.env.TWILIO_AUTH_TOKEN) return null;
+  cached = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+  return cached;
 }
 
-export const twilioClient = twilio(
-  process.env.TWILIO_ACCOUNT_SID,
-  process.env.TWILIO_AUTH_TOKEN
-);
-
-export const TWILIO_FROM = process.env.TWILIO_FROM_NUMBER;
-
-if (!TWILIO_FROM) {
-  throw new Error('TWILIO_FROM_NUMBER is required. Check .env');
-}
+export const TWILIO_FROM = process.env.TWILIO_FROM_NUMBER ?? null;
