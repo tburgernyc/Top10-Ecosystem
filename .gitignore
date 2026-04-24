@@ -34,3 +34,7 @@ Thumbs.db
 
 # Test coverage
 coverage/
+
+# Claude Code (local user state)
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
