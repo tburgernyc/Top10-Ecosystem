@@ -5,9 +5,9 @@ import { eq, desc } from 'drizzle-orm';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = { title: 'My Dashboard | Top 10 Prom' };
+export const metadata: Metadata = { title: 'My Account | Top 10 Prom' };
 
-export default async function CustomerDashboardPage() {
+export default async function AccountPage() {
   const session = await requireCustomerSession();
 
   const customerRows = await db.select({ id: customers.id })

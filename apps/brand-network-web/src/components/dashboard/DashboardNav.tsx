@@ -12,36 +12,24 @@ interface Props {
 const NAV_ITEMS_BY_ROLE: Record<string, Array<{ label: string; href: string; icon: string }>> = {
   super_admin: [
     { label: 'Network Overview', href: '/dashboard/owner', icon: '◈' },
-    { label: 'All Locations', href: '/dashboard/locations', icon: '⊕' },
     { label: 'Appointments', href: '/dashboard/receptionist', icon: '◷' },
-    { label: 'Walk-In Queue', href: '/dashboard/queue', icon: '◎' },
     { label: 'Clients', href: '/dashboard/associate', icon: '◻' },
-    { label: 'Catalog', href: '/dashboard/catalog', icon: '◩' },
     { label: 'Analytics', href: '/dashboard/analytics', icon: '◈' },
   ],
   owner: [
     { label: 'Overview', href: '/dashboard/owner', icon: '◈' },
     { label: 'Appointments', href: '/dashboard/receptionist', icon: '◷' },
-    { label: 'Walk-In Queue', href: '/dashboard/queue', icon: '◎' },
-    { label: 'My Team', href: '/dashboard/team', icon: '◻' },
-    { label: 'Inventory', href: '/dashboard/inventory', icon: '◩' },
     { label: 'Analytics', href: '/dashboard/analytics', icon: '◈' },
   ],
   manager: [
     { label: 'Overview', href: '/dashboard/owner', icon: '◈' },
     { label: 'Appointments', href: '/dashboard/receptionist', icon: '◷' },
-    { label: 'Walk-In Queue', href: '/dashboard/queue', icon: '◎' },
-    { label: 'Inventory', href: '/dashboard/inventory', icon: '◩' },
   ],
   receptionist: [
     { label: 'Appointments', href: '/dashboard/receptionist', icon: '◷' },
-    { label: 'Walk-In Queue', href: '/dashboard/queue', icon: '◎' },
-    { label: 'Check In', href: '/dashboard/check-in', icon: '✓' },
   ],
   stylist: [
     { label: 'My Clients', href: '/dashboard/associate', icon: '◻' },
-    { label: 'My Schedule', href: '/dashboard/schedule', icon: '◷' },
-    { label: 'VTO Sessions', href: '/dashboard/vto', icon: '◈' },
   ],
 };
 

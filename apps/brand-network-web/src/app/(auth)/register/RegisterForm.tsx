@@ -39,7 +39,7 @@ export default function RegisterForm() {
         await supabase.from('customers').upsert({ user_id: data.user.id });
       }
 
-      router.push('/home');
+      router.push('/account');
       router.refresh();
     });
   };

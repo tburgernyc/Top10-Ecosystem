@@ -31,5 +31,5 @@ export default async function DashboardIndexPage() {
     }
   } catch { /* no staff record — treat as customer */ }
 
-  redirect('/dashboard/customer');
+  redirect('/account');
 }

@@ -1,6 +1,6 @@
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { adminGateLimiter } from '@/lib/rate-limit';
+import { getAdminGateLimiter } from '@/lib/rate-limit';
 import GateLoginForm from './GateLoginForm';
 
 export const metadata = { title: 'Network Access', robots: { index: false, follow: false } };
@@ -8,7 +8,11 @@ export const metadata = { title: 'Network Access', robots: { index: false, follo
 export default async function GatePage() {
   const headerStore = await headers();
   const ip = headerStore.get('x-forwarded-for') ?? headerStore.get('x-real-ip') ?? '127.0.0.1';
-  const { success, remaining } = await adminGateLimiter.limit(ip);
+  const limiter = getAdminGateLimiter();
+  // Fail-open when Upstash isn't configured — prefer a usable gate over a blocked one in dev.
+  const { success, remaining } = limiter
+    ? await limiter.limit(ip)
+    : { success: true, remaining: 5 };
 
   if (!success) {
     redirect('/');

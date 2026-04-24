@@ -11,7 +11,8 @@ export default function LoginForm() {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
-  const handleLogin = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     startTransition(async () => {
       setError(null);
       const supabase = createClient();
@@ -20,18 +21,19 @@ export default function LoginForm() {
         setError('Invalid email or password. Please try again.');
         return;
       }
-      router.push('/home');
+      router.push('/dashboard');
       router.refresh();
     });
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
         <label htmlFor="login-email" style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>Email</label>
         <input
           id="login-email"
           type="email"
+          required
           className="input-luxury"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -46,6 +48,7 @@ export default function LoginForm() {
         <input
           id="login-password"
           type="password"
+          required
           className="input-luxury"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -62,30 +65,14 @@ export default function LoginForm() {
 
       <button
         id="login-submit"
-        type="button"
+        type="submit"
         className="btn-primary"
         style={{ width: '100%', marginTop: '0.5rem' }}
-        onClick={handleLogin}
         disabled={isPending || !email || !password}
         aria-disabled={isPending}
       >
         {isPending ? 'Signing in…' : 'Sign In'}
       </button>
-
-      <a
-        href="#"
-        style={{
-          color: 'var(--color-text-tertiary)',
-          fontSize: '0.875rem',
-          textAlign: 'center',
-          textDecoration: 'none',
-          transition: `color 0.2s var(--ease-luxury)`,
-        }}
-        onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-primary)')}
-        onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-text-tertiary)')}
-      >
-        Forgot your password?
-      </a>
-    </div>
+    </form>
   );
 }
