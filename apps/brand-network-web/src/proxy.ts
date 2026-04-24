@@ -42,7 +42,7 @@ export default async function proxy(request: NextRequest): Promise<NextResponse>
   const authResponse = await updateSession(request);
 
   // ── Subdomain extraction ────────────────────────────────────────────────
-  const baseDomain = process.env['NEXT_PUBLIC_DOMAIN'] ?? 'toptenprom.com';
+  const baseDomain = process.env['NEXT_PUBLIC_DOMAIN'] ?? 'toptenprom.store';
   const isLocalhost = hostname === 'localhost' || hostname === '127.0.0.1';
 
   let subdomain: string | null = null;

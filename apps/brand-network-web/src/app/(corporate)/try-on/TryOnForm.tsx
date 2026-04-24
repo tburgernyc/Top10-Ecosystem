@@ -87,7 +87,10 @@ export default function TryOnForm() {
           }),
         });
 
-        if (!response.ok) throw new Error('VTO initiation failed');
+        if (!response.ok) {
+          const errPayload = (await response.json().catch(() => null)) as { error?: string } | null;
+          throw new Error(errPayload?.error ?? 'Virtual Try-On is currently unavailable.');
+        }
 
         const { channel_id } = await response.json() as { session_id: string; channel_id: string };
 
@@ -127,8 +130,9 @@ export default function TryOnForm() {
           });
         }, 45000);
 
-      } catch {
-        setError('Something went wrong. Please try again.');
+      } catch (err) {
+        const message = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
+        setError(message);
         setStatus('failed');
       }
     });

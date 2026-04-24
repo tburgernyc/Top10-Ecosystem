@@ -26,6 +26,7 @@ export default function LocatorMap({ locations }: Props) {
   const [selectedLocation, setSelectedLocation] = useState<Tenant | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [nearestId, setNearestId] = useState<string | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const hasMapKey = Boolean(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
 
   const filtered = locations.filter(
@@ -63,7 +64,7 @@ export default function LocatorMap({ locations }: Props) {
 
     const loader = new Loader({ apiKey, version: 'beta', libraries: ['maps', 'marker'] });
 
-    void loader.load().then(async () => {
+    loader.load().then(async () => {
       const { Map } = await google.maps.importLibrary('maps') as google.maps.MapsLibrary;
       const { AdvancedMarkerElement } = await google.maps.importLibrary('marker') as google.maps.MarkerLibrary;
 
@@ -91,6 +92,9 @@ export default function LocatorMap({ locations }: Props) {
           map.panTo({ lat: location.location_data!.lat, lng: location.location_data!.lng });
         });
       });
+    }).catch((err: unknown) => {
+      const message = err instanceof Error ? err.message : 'Map failed to load';
+      setLoadError(message);
     });
   }, [locations]);
 
@@ -168,9 +172,7 @@ export default function LocatorMap({ locations }: Props) {
       </div>
 
       {/* Map canvas */}
-      {hasMapKey ? (
-        <div ref={mapRef} style={{ width: '100%', height: '100%', minHeight: '600px' }} aria-label="Boutique locations map" />
-      ) : (
+      {!hasMapKey ? (
         <div
           style={{
             display: 'flex',
@@ -190,6 +192,34 @@ export default function LocatorMap({ locations }: Props) {
             Configure <code>NEXT_PUBLIC_GOOGLE_MAPS_API_KEY</code> to enable the map.
           </p>
         </div>
+      ) : loadError ? (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '0.75rem',
+            padding: '2rem',
+            background: 'var(--color-bg-elevated)',
+            minHeight: '600px',
+            textAlign: 'center',
+          }}
+          role="alert"
+          aria-label="Map failed to load"
+        >
+          <p style={{ color: 'var(--color-error)', fontSize: '0.875rem', letterSpacing: '0.05em', textTransform: 'uppercase', fontWeight: 600 }}>
+            Map could not load
+          </p>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '0.8125rem', maxWidth: '28rem' }}>
+            {loadError}
+          </p>
+          <p style={{ color: 'var(--color-text-tertiary)', fontSize: '0.75rem' }}>
+            You can still browse boutique locations in the list on the left.
+          </p>
+        </div>
+      ) : (
+        <div ref={mapRef} style={{ width: '100%', height: '100%', minHeight: '600px' }} aria-label="Boutique locations map" />
       )}
     </div>
   );
