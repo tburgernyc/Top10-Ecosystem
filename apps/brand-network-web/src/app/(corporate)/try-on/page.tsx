@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   description: 'See how any dress looks on you with our AI-powered Virtual Try-On experience.',
 };
 
+export const dynamic = 'force-dynamic';
+
 export default function TryOnPage() {
   return (
     <div

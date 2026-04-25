@@ -5,6 +5,8 @@ import GateLoginForm from './GateLoginForm';
 
 export const metadata = { title: 'Network Access', robots: { index: false, follow: false } };
 
+export const dynamic = 'force-dynamic';
+
 export default async function GatePage() {
   const headerStore = await headers();
   const ip = headerStore.get('x-forwarded-for') ?? headerStore.get('x-real-ip') ?? '127.0.0.1';

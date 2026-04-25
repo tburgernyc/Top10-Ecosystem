@@ -3,6 +3,8 @@ import DashboardNav from '@/components/dashboard/DashboardNav';
 
 export const metadata = { title: 'Dashboard', robots: { index: false, follow: false } };
 
+export const dynamic = 'force-dynamic';
+
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const authUser = await requireDashboardSession();
 

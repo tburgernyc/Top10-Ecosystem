@@ -4,6 +4,8 @@ import { requireCustomerSession } from '@/lib/auth';
 
 export const metadata = { title: 'My Account', robots: { index: false, follow: false } };
 
+export const dynamic = 'force-dynamic';
+
 export default async function AccountLayout({ children }: { children: React.ReactNode }) {
   await requireCustomerSession();
 
