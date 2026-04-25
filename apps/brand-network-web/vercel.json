@@ -32,8 +32,18 @@
     "src/app/api/analytics/export/route.ts": {
       "maxDuration": 30,
       "memory": 1024
+    },
+    "src/app/api/cron/nightly-maintenance/route.ts": {
+      "maxDuration": 300,
+      "memory": 1024
     }
   },
+  "crons": [
+    {
+      "path": "/api/cron/nightly-maintenance",
+      "schedule": "0 3 * * *"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
