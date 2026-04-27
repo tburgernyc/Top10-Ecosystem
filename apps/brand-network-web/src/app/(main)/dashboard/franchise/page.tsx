@@ -12,12 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function FranchisePage() {
-  let session: Awaited<ReturnType<typeof requireDashboardSession>>;
-  try {
-    session = await requireDashboardSession();
-  } catch {
-    redirect('/login');
-  }
+  const session = await requireDashboardSession();
 
   if (session.role !== 'super_admin') redirect('/dashboard');
 

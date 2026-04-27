@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 import { requireDashboardSession } from '@/lib/auth';
 import {
@@ -19,12 +18,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AnalyticsPage() {
-  let session: Awaited<ReturnType<typeof requireDashboardSession>>;
-  try {
-    session = await requireDashboardSession();
-  } catch {
-    redirect('/login');
-  }
+  const session = await requireDashboardSession();
 
   const isSuperAdmin = session.role === 'super_admin';
   const tenantFilter = isSuperAdmin ? undefined : session.tenant_id ?? undefined;

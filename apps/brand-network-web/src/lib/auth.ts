@@ -43,6 +43,21 @@ export type AuthUser = {
   tenant_id: string | null;
 };
 
+export type StaffRole = AuthUser['role'];
+
+const STAFF_ROLE_ROUTES: Record<StaffRole, string> = {
+  super_admin: '/dashboard/owner',
+  owner: '/dashboard/owner',
+  manager: '/dashboard/owner',
+  stylist: '/dashboard/associate',
+  receptionist: '/dashboard/receptionist',
+};
+
+/** Maps a staff role to its landing route. Single source of truth for role-based routing. */
+export function staffRoleToRoute(role: string): string {
+  return STAFF_ROLE_ROUTES[role as StaffRole] ?? '/dashboard/receptionist';
+}
+
 /**
  * `requireDashboardSession` — Server-side auth guard for all dashboard routes.
  *
@@ -99,9 +114,11 @@ export async function requireDashboardSession(): Promise<AuthUser> {
     // DB error — fall through to redirect
   }
 
-  // redirect() MUST be outside try/catch
+  // redirect() MUST be outside try/catch.
+  // User IS authenticated at this point (would have redirected above otherwise) —
+  // they just lack a staff record, so route them to the customer side, not /login.
   if (!authUser) {
-    redirect('/login');
+    redirect('/account');
   }
 
   return authUser;

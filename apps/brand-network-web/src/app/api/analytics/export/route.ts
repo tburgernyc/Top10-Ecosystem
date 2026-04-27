@@ -5,12 +5,7 @@ import { renderToBuffer } from '@react-pdf/renderer';
 import { NetworkReportDocument } from '@/components/pdf/NetworkReportDocument';
 
 export async function GET(): Promise<NextResponse> {
-  let session: Awaited<ReturnType<typeof requireDashboardSession>>;
-  try {
-    session = await requireDashboardSession();
-  } catch {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
+  const session = await requireDashboardSession();
 
   if (!['super_admin', 'owner'].includes(session.role)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });

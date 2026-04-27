@@ -33,12 +33,7 @@ type OnboardResult =
 export async function onboardFranchiseLocation(
   params: OnboardFranchiseParams
 ): Promise<OnboardResult> {
-  let session: Awaited<ReturnType<typeof requireDashboardSession>>;
-  try {
-    session = await requireDashboardSession();
-  } catch {
-    return { success: false, error: 'Authentication required.' };
-  }
+  const session = await requireDashboardSession();
 
   if (session.role !== 'super_admin') {
     return { success: false, error: 'Only super_admin may onboard new franchise locations.' };

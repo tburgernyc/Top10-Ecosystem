@@ -1,37 +1,22 @@
 'use client';
 
-import { useState, useTransition } from 'react';
-import { useRouter } from 'next/navigation';
-import { createClient } from '@/lib/supabase/client';
+import { useActionState, useState } from 'react';
+import { signInAction, type LoginActionState } from './actions';
+
+const INITIAL_STATE: LoginActionState = { error: null };
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
-  const [isPending, startTransition] = useTransition();
-  const router = useRouter();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    startTransition(async () => {
-      setError(null);
-      const supabase = createClient();
-      const { error: authError } = await supabase.auth.signInWithPassword({ email, password });
-      if (authError) {
-        setError('Invalid email or password. Please try again.');
-        return;
-      }
-      router.push('/dashboard');
-      router.refresh();
-    });
-  };
+  const [state, formAction, isPending] = useActionState(signInAction, INITIAL_STATE);
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <form action={formAction} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
         <label htmlFor="login-email" style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>Email</label>
         <input
           id="login-email"
+          name="email"
           type="email"
           required
           className="input-luxury"
@@ -47,6 +32,7 @@ export default function LoginForm() {
         <label htmlFor="login-password" style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>Password</label>
         <input
           id="login-password"
+          name="password"
           type="password"
           required
           className="input-luxury"
@@ -59,8 +45,8 @@ export default function LoginForm() {
         />
       </div>
 
-      {error && (
-        <p role="alert" style={{ color: 'var(--color-error)', fontSize: '0.875rem', textAlign: 'center' }}>{error}</p>
+      {state.error && (
+        <p role="alert" style={{ color: 'var(--color-error)', fontSize: '0.875rem', textAlign: 'center' }}>{state.error}</p>
       )}
 
       <button
